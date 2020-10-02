@@ -7,7 +7,7 @@ sudo: false
 
 
 before_install:
-  chmod +x mvnw
+  chmod a+x mvnw
 
 
 
