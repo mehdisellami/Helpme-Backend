@@ -1,0 +1,22 @@
+env:
+language: java
+
+
+sudo: false
+
+
+
+before_install:
+  chmod a+x ./gradlew
+
+
+
+
+script:
+  - ./gradlew check
+
+
+after_success:
+
+cache:
+  directories:
