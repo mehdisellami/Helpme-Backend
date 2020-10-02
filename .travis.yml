@@ -6,8 +6,7 @@ sudo: false
 
 
 
-before_install:
-  chmod a+x ./mvnw
+
 
 
 
