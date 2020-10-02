@@ -14,7 +14,7 @@ before_install:
 
 
 
-script:  ./mvnw build
+script:  ./mvnw check
 
 
 after_success:
