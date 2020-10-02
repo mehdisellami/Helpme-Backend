@@ -6,12 +6,15 @@ sudo: false
 
 
 
+before_install:
+  chmod +x mvnw
 
 
 
 
 
-script:  ./mvnw clean install
+
+script:  ./mvnw build
 
 
 after_success:
