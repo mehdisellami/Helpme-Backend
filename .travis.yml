@@ -14,7 +14,7 @@ before_install:
 
 
 
-script:  ./mvnw check
+script:  ./mvnw clean install
 
 
 after_success:
