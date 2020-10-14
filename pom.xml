@@ -8,8 +8,8 @@
 	<version>0.0.1</version>
 	<packaging>jar</packaging>
 
-	<name>SpringBootJwtAuthentication</name>
-	<description>SpringBootJwtAuthentication</description>
+	<name>HelpmeApp</name>
+	<description>HelpmeApp</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
