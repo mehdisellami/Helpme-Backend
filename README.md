@@ -10,7 +10,7 @@
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=mehdisellami_Helpme-Backend&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=mehdisellami_Helpme-Backend)
 
 # Projet Helpme
- Application qui permet de créer / chercher des missions à travers des données géolocalisé et de génerer des rapports en fonctions des missions accomplies
+ HelpMe est une application qui vous permet de créer / chercher des missions à proches de chez vous. 
 
  # Environnement Technique : 
  - Install Git 
