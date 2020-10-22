@@ -1,0 +1,23 @@
+env:
+language: java
+
+
+sudo: false
+
+
+
+before_install:
+  chmod a+x mvnw
+
+
+
+
+
+install: true
+script:  ./mvnw clean install
+
+
+after_success:
+
+cache:
+  directories:
