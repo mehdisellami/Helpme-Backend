@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="31cb1dfb-15b1-4ed8-b329-b3b7534810ef" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/HelpmeApp/Helpme-Backend" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/HelpmeApp/src/main/java/com/application/helpme/controlleur/Controlleur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/HelpmeApp/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/HelpmeApp/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HelpmeApp/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/HelpmeApp/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,7 +14,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/HelpmeApp" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -31,24 +33,47 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ExpandSpringBootJavaOptionsPanel" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+  <component name="RunManager" selected="Spring Boot.Unnamed">
+    <configuration name="HelpmeBack" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <module name="Helpmeback" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Unnamed" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="Helpmeback" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="main.java.com.application.helpme.HelpmeAppApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.HelpmeBack" />
+      <item itemvalue="Spring Boot.Unnamed" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -60,7 +85,13 @@
       <updated>1601633179259</updated>
       <workItem from="1601633180718" duration="48000" />
       <workItem from="1601634930069" duration="52000" />
-      <workItem from="1601635736060" duration="2105000" />
+      <workItem from="1601635736060" duration="3630000" />
+      <workItem from="1601643696735" duration="597000" />
+      <workItem from="1601985583253" duration="35000" />
+      <workItem from="1602164139514" duration="95000" />
+      <workItem from="1602164257336" duration="504000" />
+      <workItem from="1602164810319" duration="445000" />
+      <workItem from="1603138578512" duration="588000" />
     </task>
     <task id="LOCAL-00001" summary="hi">
       <created>1601637739632</created>
@@ -69,7 +100,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601637739632</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="hi">
+      <created>1601639922796</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1601639922796</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -81,21 +119,53 @@
     <option name="LAST_COMMIT_MESSAGE" value="hi" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="375" y="0" key="CommitChangelistDialog2" timestamp="1601637738727">
+    <state x="396" y="0" width="1089" height="824" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603139152519">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="375" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1601637738727" />
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1601634986038">
+    <state x="396" y="0" width="1089" height="824" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1603139152519" />
+    <state x="548" y="148" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1602164589221">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1601634986038" />
-    <state x="277" y="57" key="SettingsEditor" timestamp="1601635796401">
+    <state x="548" y="148" key="#com.intellij.ide.macro.MacrosDialog/0.0.1536.824@0.0.1536.824" timestamp="1602164589221" />
+    <state x="498" y="214" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1603138888286">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1601635796401" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1601637745660">
+    <state x="498" y="214" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1536.824@0.0.1536.824" timestamp="1603138888286" />
+    <state x="375" y="0" key="CommitChangelistDialog2" timestamp="1601639921949">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1601637745660" />
+    <state x="375" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1601639921949" />
+    <state x="637" y="193" key="EnvironmentVariablesDialog" timestamp="1602164581824">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="637" y="193" key="EnvironmentVariablesDialog/0.0.1536.824@0.0.1536.824" timestamp="1602164581824" />
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1602165033672">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1602165033672" />
+    <state width="1537" height="218" key="GridCell.Tab.0.bottom" timestamp="1603139169433">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1537" height="218" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1603139169433" />
+    <state width="1537" height="218" key="GridCell.Tab.0.center" timestamp="1603139169433">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1537" height="218" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1603139169433" />
+    <state width="1537" height="218" key="GridCell.Tab.0.left" timestamp="1603139169433">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1537" height="218" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1603139169433" />
+    <state width="1537" height="218" key="GridCell.Tab.0.right" timestamp="1603139169433">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1537" height="218" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1603139169433" />
+    <state x="277" y="57" key="SettingsEditor" timestamp="1602164234694">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1602164234694" />
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2" timestamp="1601639924421">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1601639924421" />
   </component>
 </project>
