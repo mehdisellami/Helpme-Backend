@@ -36,20 +36,24 @@ public class User {
   
 
 	@NaturalId
-    @NotBlank
     @Email
     private String email;
 	
-	@JsonIgnore
+	
     @NotBlank
     private String password;
 	
-	@JsonIgnore
+	
     @NotBlank
     private String tel;
 
 	
 	
+	
+	public User() {
+		super();
+	}
+
 	public User(Long id, @NotBlank @Size(min = 3, max = 50) String name,
 			@NotBlank @Size(min = 3, max = 50) String username, @NotBlank @Email String email,
 			@NotBlank String password, @NotBlank String tel) {

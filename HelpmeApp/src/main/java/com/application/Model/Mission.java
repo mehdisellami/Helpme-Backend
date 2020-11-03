@@ -53,6 +53,11 @@ public class Mission {
 	
 
 
+	public Mission() {
+		
+	}
+
+
 	public Mission(Long idMission, @NotBlank String nomMission, @NotBlank String adressMission, LocalDate dateMission,
 			@NotBlank String description, etatMission etatmission, User userMission) {
 		super();
