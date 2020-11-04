@@ -32,7 +32,7 @@ public class Mission {
 	
 	LocalDate dateMission;
 	
-	
+	private String tel;
 	
 	
 	@NotBlank
