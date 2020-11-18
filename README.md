@@ -6,6 +6,8 @@
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=mehdisellami_Helpme-Backend&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=mehdisellami_Helpme-Backend)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=mehdisellami_Helpme-Backend&metric=bugs)](https://sonarcloud.io/dashboard?id=mehdisellami_Helpme-Backend)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=mehdisellami_Helpme-Backend&metric=code_smells)](https://sonarcloud.io/dashboard?id=mehdisellami_Helpme-Backend)
+[![Tag](https://img.shields.io/github/v/tag/mehdisellami/Helpme-Backend)](build.gradle)
+[![Release](https://img.shields.io/github/v/release/mehdisellami/Helpme-Backend)](build.gradle)
 
 # Qui sommes-nous ?
  HelpMe est une application qui vous permet de chercher ou bien de créer des missions à destination de personnes à proximité de chez vous.
