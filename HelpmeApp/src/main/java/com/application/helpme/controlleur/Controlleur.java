@@ -47,12 +47,11 @@ public class Controlleur {
 		Mission dem = new Mission();
 		
 		dem.setNomMission(m.getNomMission());
-		dem.setDateMission(m.getDateMission());
 		dem.setAdressMission(m.getAdressMission());
-		dem.setEtatmission(m.getEtatmission());
-		dem.setUserMission(m.getUserMission());
+		dem.setDateMission(m.getDateMission());
 		dem.setDescription(m.getDescription());
 		dem.setUserMission(m.getUserMission());
+		
 	
 
 		return 	mr.save(dem);
@@ -94,6 +93,8 @@ public class Controlleur {
 	
 	
 }
+	
+	
 
 
 }

@@ -2,12 +2,15 @@ package com.application.Model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
@@ -38,10 +41,11 @@ public class Mission {
 	@NotBlank
     private String description;
 	
-	@Enumerated(EnumType.STRING)
-	 private etatMission etatmission;
 	
-	@ManyToOne 
+	
+	@ManyToOne (fetch = FetchType.LAZY)
+	@JoinColumn(name = "id")
+
 	User userMission;
 	
 	
@@ -59,14 +63,13 @@ public class Mission {
 
 
 	public Mission(Long idMission, @NotBlank String nomMission, @NotBlank String adressMission, LocalDate dateMission,
-			@NotBlank String description, etatMission etatmission, User userMission) {
+			@NotBlank String description, User userMission) {
 		super();
 		this.idMission = idMission;
 		this.nomMission = nomMission;
 		this.adressMission = adressMission;
 		this.dateMission = dateMission;
 		this.description = description;
-		this.etatmission = etatmission;
 		this.userMission = userMission;
 	}
 
@@ -111,15 +114,7 @@ public class Mission {
 	}
 
 
-	public etatMission getEtatmission() {
-		return etatmission;
-	}
-
-
-	public void setEtatmission(etatMission etatmission) {
-		this.etatmission = etatmission;
-	}
-
+	
 
 	public LocalDate getDateMission() {
 		return dateMission;
