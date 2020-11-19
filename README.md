@@ -21,7 +21,6 @@
  git clone git@github.com:mehdisellami/Helpme-Backend.git
  ```
 
-L'application sera alors disponible à l'adresse [http://localhost:4200](http://localhost:4200). <br>
 Ce repository contient le Backend de notre application. Le Frontend se trouve à [cette adresse](https://github.com/mehdisellami/Helpme-Frontend).
 
 # Auteurs
