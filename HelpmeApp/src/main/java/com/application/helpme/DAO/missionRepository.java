@@ -7,5 +7,8 @@ import com.application.Model.Mission;
 public interface missionRepository extends JpaRepository<Mission, Long> {
 	
 	
+	
+	
+	
 
 }
