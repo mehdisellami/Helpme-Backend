@@ -100,14 +100,7 @@ public class Controlleur {
 	
 
 	
-	@GetMapping("/LoggedUser")
-	public Boolean searchUser(@PathVariable String username ) {
-		ur.existByUsername(username);
-		
-		return true;
-	
-	
-}
+
 
 	
 
