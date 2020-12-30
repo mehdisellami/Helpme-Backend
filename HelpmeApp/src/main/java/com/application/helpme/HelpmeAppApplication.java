@@ -13,7 +13,6 @@ import com.application.Model.User;
 
 
 @EntityScan(basePackages = {"com.application.Model"})
-@ComponentScan({"com.application.lookek.controlleur"})
 @SpringBootApplication
 public class HelpmeAppApplication {
 

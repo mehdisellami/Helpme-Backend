@@ -40,7 +40,7 @@ public class Controlleur {
 	userRepository ur;
 
 	
-	@GetMapping("/test")
+	@GetMapping("/")
 	public String RestApi() {
 		return "HelpME Application Université Paris Nanterre";
 	}
