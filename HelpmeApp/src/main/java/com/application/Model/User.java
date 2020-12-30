@@ -53,6 +53,10 @@ public class User {
 	public User() {
 		super();
 	}
+	
+	public User(String Status) {
+		super();
+	}
 
 	public User(Long id, @NotBlank @Size(min = 3, max = 50) String name,
 			@NotBlank @Size(min = 3, max = 50) String username, @NotBlank @Email String email,
