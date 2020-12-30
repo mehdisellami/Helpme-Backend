@@ -22,7 +22,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-		
+		<maven-jar-plugin.version>3.1.1 </maven-jar-plugin.version>
 		<sonar.projectKey>mehdisellami_Helpme-Backend</sonar.projectKey>
   <sonar.organization>mehdisellami</sonar.organization>
   <sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -116,7 +116,7 @@
 		<plugins>
 			
 			
-			<plugin>
+	<!-- 		<plugin>
     <groupId>org.jacoco</groupId>
     <artifactId>jacoco-maven-plugin</artifactId>
     <version>0.7.7.201606060606</version>
@@ -151,32 +151,11 @@
             </configuration>
         </execution>
     </executions>
-</plugin>
+</plugin> -->
 		 <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.5.1</version>
-            <configuration>
-                <source>1.8</source>
-                <target>1.8</target>
-            </configuration>
-        </plugin>
-
-		<plugin>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-maven-plugin</artifactId>
-    <version>${spring.boot.version}</version>
-    <configuration>
-        <mainClass>HelpmeAppApplication</mainClass>
-        <layout>ZIP</layout>
-    </configuration>
-    <executions>
-        <execution>
-            <goals>
-                <goal>repackage</goal>
-            </goals>
-        </execution>
-    </executions>
+  
 </plugin>
 		</plugins>
 	</build>
