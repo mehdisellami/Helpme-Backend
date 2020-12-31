@@ -34,6 +34,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 @RequestMapping("/")
 @Controller("/")
 
+
 public class Controlleur {
 	
 	@Autowired
