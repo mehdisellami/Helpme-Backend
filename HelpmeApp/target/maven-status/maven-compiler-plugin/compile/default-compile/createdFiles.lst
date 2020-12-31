@@ -1,7 +1,7 @@
 com\application\helpme\DAO\missionRepository.class
 com\application\helpme\HelpmeAppApplication.class
 com\application\helpme\controlleur\Controlleur.class
-com\application\Model\etatMission.class
+com\application\helpme\Model\etatMission.class
 com\application\helpme\DAO\userRepository.class
-com\application\Model\User.class
-com\application\Model\Mission.class
+com\application\helpme\Model\Mission.class
+com\application\helpme\Model\User.class
