@@ -15,6 +15,7 @@ import com.application.Model.User;
 
 
 @EntityScan(basePackages = {"com.application.Model"})
+@ComponentScan("com.application.helpme.controlleur")
 @SpringBootApplication
 public class HelpmeAppApplication extends SpringBootServletInitializer {
 	
