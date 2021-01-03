@@ -1,9 +1,9 @@
 ## HelpMe
-HelpMe est une application qui vous permet de solliciter l'aide de n'importe qui à proximité de chez vous pour n'importe quel type de besoin.
+HelpMe est une application qui vous permet de solliciter l'aide de n'importe qui à proximité de chez vous pour n'importe quel type de besoin. <br>
 Ainsi, chaque utilisateur proche de vous peut venir vous rendre service s'il le souhaite.
 
 ## Comment accéder à l'application ?
-L'application est disponible à l'adresse suivante : [HelpMe](https://helpmeweb.herokuapp.com/).
+L'application est disponible à l'adresse suivante : [HelpMe](https://helpmeweb.herokuapp.com/). <br>
 Le code source est également disponible pour le front end [ici](https://github.com/mehdisellami/Helpme-Frontend) et pour le back end [ici](https://github.com/mehdisellami/Helpme-Backend)
 
 ## Features
