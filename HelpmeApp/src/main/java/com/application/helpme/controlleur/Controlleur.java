@@ -71,11 +71,6 @@ public class Controlleur {
 		
 	}
 	
-		@DeleteMapping("/deletemission")
-    public Boolean deleteMission(Long idMission) {
-         mr.deleteById(idMission);
-         return true ;
-    }
 	
 	
 
