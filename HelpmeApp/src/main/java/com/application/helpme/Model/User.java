@@ -1,9 +1,16 @@
 package com.application.helpme.Model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -46,6 +53,12 @@ public class User {
 	
     @NotBlank
     private String tel;
+    
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles", 
+    	joinColumns = @JoinColumn(name = "user_id"), 
+    	inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
 	
 	
@@ -68,6 +81,31 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.tel=tel;
+	}
+
+	
+	public User(@NotBlank @Size(min = 3, max = 50) String name, @NotBlank @Size(min = 3, max = 50) String username,
+			@Email String email, @NotBlank String password, @NotBlank String tel,
+			Set<com.application.helpme.Model.Role> roles) {
+		super();
+		this.name = name;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.tel = tel;
+		this.roles = roles;
+	}
+	
+	
+
+	public User(@NotBlank @Size(min = 3, max = 50) String name, @NotBlank @Size(min = 3, max = 50) String username,
+			@Email String email, @NotBlank String password, @NotBlank String tel) {
+		super();
+		this.name = name;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.tel = tel;
 	}
 
 	public Long getId() {
@@ -116,6 +154,14 @@ public class User {
 
 	public void setTel(String tel) {
 		this.tel = tel;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
 	
 	

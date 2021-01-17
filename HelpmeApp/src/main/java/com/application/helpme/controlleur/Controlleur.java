@@ -9,6 +9,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,8 +32,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/")
-@Controller("/")
+
 
 
 public class Controlleur {
@@ -44,7 +44,8 @@ public class Controlleur {
 	userRepository ur;
 
 	
-	@GetMapping("/")
+	@GetMapping("/test")
+	@PreAuthorize("hasRole('ADMIN')")
 	public String RestApi() {
 		return "HelpME Application Université Paris Nanterre";
 	}
@@ -52,6 +53,7 @@ public class Controlleur {
 	
 	
 	@PostMapping("/newmission")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	public Mission addNewMission(@Valid  @RequestBody Mission m  ) {
 		
@@ -74,6 +76,7 @@ public class Controlleur {
 	
 
 	@PostMapping("/newuser")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	public User addNewUser(@Valid  @RequestBody User u  ) {
 		
@@ -92,6 +95,7 @@ public class Controlleur {
 	
 	
 	@GetMapping("/listeMission")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public Iterable<Mission> findProjet() {
 		return  mr.findAll();
 	
@@ -99,6 +103,7 @@ public class Controlleur {
 }
 	
 	@GetMapping("/listeUser")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public Iterable<User> findUser() {
 		return  ur.findAll();
 	
@@ -107,6 +112,7 @@ public class Controlleur {
 
 	
 	@GetMapping("/Login/{username}/{password}")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public String loginUser(@PathVariable String username, @PathVariable String password) {
 		
 		 ur.finduserByuserNameandPassword(username , password);
