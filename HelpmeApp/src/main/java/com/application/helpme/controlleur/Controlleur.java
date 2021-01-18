@@ -73,6 +73,12 @@ public class Controlleur {
 		
 	}
 	
+	@DeleteMapping("/deletemission/{idMission}")
+    public Boolean deleteMission(@PathVariable long idMission) {
+         mr.deleteById(idMission);
+         return true ;
+    }
+	
 	
 	
 
