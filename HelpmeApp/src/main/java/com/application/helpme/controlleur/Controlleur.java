@@ -149,6 +149,15 @@ public class Controlleur {
 			
 	}
 	
+	@GetMapping("/findUserMissionHistory/{username}")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public List<Mission> findUserMissionHistory(@PathVariable String username) {
+		
+		return mr.findUserMissionHistory(username);
+		 
+			
+	}
+	
 	
 	@PutMapping("/affecterUserMission/{iduser}/{idmission}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
