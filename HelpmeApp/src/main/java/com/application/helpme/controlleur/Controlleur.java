@@ -1,9 +1,9 @@
 package com.application.helpme.controlleur;
 
 
-import java.awt.List;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -14,8 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +30,7 @@ import com.application.helpme.Model.User;
 import com.application.helpme.Model.etatMission;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+
 
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -64,6 +67,7 @@ public class Controlleur {
 		dem.setDateMission(m.getDateMission());
 		dem.setDescription(m.getDescription());
 		dem.setUserMission(m.getUserMission());
+		dem.setStatusMission(dem.getStatusMission());
 		
 	
 
@@ -126,5 +130,41 @@ public class Controlleur {
 		 return String.format("L'utilisateur %s est Connecté", username);
 			
 }
+	
+	@GetMapping("/findidUserbyUsername/{username}")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public Long findIDuserByusername(@PathVariable String username) {
+		
+		return ur.findIDuserByusername(username );
+		 
+			
+	}
+	
+	@GetMapping("/findUserbyUsername/{username}")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public List<User> finduserByusername(@PathVariable String username) {
+		
+		return ur.findUserByUsername(username);
+		 
+			
+	}
+	
+	
+	@PutMapping("/affecterUserMission/{iduser}/{idmission}")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public Mission  affecterUserMission(@PathVariable Long iduser  , @PathVariable  Long idmission) {
+
+		Mission x = mr.findById(idmission).get();
+		
+		
+		x.setUserMission(ur.findById(iduser).get());
+		
+		x.setStatusMission(etatMission.ACCEPTE);
+
+	return	mr.save(x);
+
+		
+	} 
+
 
 }

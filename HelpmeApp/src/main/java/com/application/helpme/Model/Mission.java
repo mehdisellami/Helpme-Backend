@@ -41,12 +41,15 @@ public class Mission {
 	@NotBlank
     private String description;
 	
+	@Enumerated(EnumType.ORDINAL)
+	private etatMission statusMission = etatMission.ENATTENTE;
+	
 	
 	
 	@ManyToOne (fetch = FetchType.LAZY)
 	@JoinColumn(name = "id")
 
-	User userMission;
+	User userMission ;
 	
 	
 
@@ -71,6 +74,7 @@ public class Mission {
 		this.dateMission = dateMission;
 		this.description = description;
 		this.userMission = userMission;
+		
 	}
 
 
@@ -134,9 +138,23 @@ public class Mission {
 	public void setUserMission(User userMission) {
 		this.userMission = userMission;
 	}
+
+
+	public etatMission getStatusMission() {
+		return statusMission;
+	}
+
+
+	public void setStatusMission(etatMission statusMission) {
+		this.statusMission = statusMission;
+	}
+
+
+	
 	
 	
 
+	
 
 	
 	
