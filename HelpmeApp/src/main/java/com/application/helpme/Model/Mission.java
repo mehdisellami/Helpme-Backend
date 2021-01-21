@@ -44,12 +44,16 @@ public class Mission {
 	@Enumerated(EnumType.ORDINAL)
 	private etatMission statusMission = etatMission.ENATTENTE;
 	
+	@Enumerated(EnumType.ORDINAL)
+	private FeedbackMission feedbackNote = FeedbackMission.ETOILE0;
 	
 	
 	@ManyToOne (fetch = FetchType.LAZY)
 	@JoinColumn(name = "id")
 
 	User userMission ;
+	
+	private String commentaire;
 	
 	
 
@@ -150,6 +154,27 @@ public class Mission {
 	}
 
 
+	public FeedbackMission getFeedbackNote() {
+		return feedbackNote;
+	}
+
+
+	public void setFeedbackNote(FeedbackMission feedbackNote) {
+		this.feedbackNote = feedbackNote;
+	}
+
+
+	public String getCommentaire() {
+		return commentaire;
+	}
+
+
+	public void setCommentaire(String commentaire) {
+		this.commentaire = commentaire;
+	}
+
+
+	
 	
 	
 	

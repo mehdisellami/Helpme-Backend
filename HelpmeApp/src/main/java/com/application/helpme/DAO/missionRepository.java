@@ -16,10 +16,11 @@ import com.application.helpme.Model.User;
 public interface missionRepository extends JpaRepository<Mission, Long> {
 	
 	
-	@Query("from Mission m WHERE m.userMission.username=:username AND m.statusMission=3  ")
+	@Query("from Mission m WHERE m.userMission.username=:username AND m.statusMission=2  ")
 	public List<Mission> findUserMissionHistory(@Param("username") String username);
 	
 	
-	
+	@Query("from Mission m WHERE  m.statusMission=0  ")
+	public List<Mission> findMissionenAttente();
 
 }

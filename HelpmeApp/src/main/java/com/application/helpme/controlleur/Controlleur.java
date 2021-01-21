@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.application.helpme.DAO.missionRepository;
 import com.application.helpme.DAO.userRepository;
+import com.application.helpme.Model.FeedbackMission;
 import com.application.helpme.Model.Mission;
 import com.application.helpme.Model.User;
 import com.application.helpme.Model.etatMission;
@@ -68,6 +69,7 @@ public class Controlleur {
 		dem.setDescription(m.getDescription());
 		dem.setUserMission(m.getUserMission());
 		dem.setStatusMission(dem.getStatusMission());
+		dem.setFeedbackNote(dem.getFeedbackNote());
 		
 	
 
@@ -109,6 +111,14 @@ public class Controlleur {
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public Iterable<Mission> findProjet() {
 		return  mr.findAll();
+	
+	
+}
+	
+	@GetMapping("/listeMissionEnAttente")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public Iterable<Mission> findMissionAttente() {
+		return  mr.findMissionenAttente();
 	
 	
 }
@@ -161,7 +171,9 @@ public class Controlleur {
 	
 	@PutMapping("/affecterUserMission/{iduser}/{idmission}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public Mission  affecterUserMission(@PathVariable Long iduser  , @PathVariable  Long idmission) {
+	public synchronized  Mission  affecterUserMission(@PathVariable Long iduser  , @PathVariable  Long idmission) {
+		
+		
 
 		Mission x = mr.findById(idmission).get();
 		
@@ -174,6 +186,64 @@ public class Controlleur {
 
 		
 	} 
+	
+	
+	@PutMapping("/Missiontermine/{idmission}")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public synchronized  Mission  terminerMission( @PathVariable  Long idmission) {
 
+		Mission x = mr.findById(idmission).get();
+		
+		x.setStatusMission(etatMission.Termine);
+
+		return	mr.save(x);
+
+		
+	} 
+
+	
+	@PutMapping("/feedBackMission/{idmission}/{IdNoteMission}")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public synchronized  Mission  feedBackMission( @PathVariable  Long idmission , @PathVariable  Long IdNoteMission ) throws Exception {
+		
+		Mission x = mr.findById(idmission).get();
+		
+			
+		if (IdNoteMission == 1 && x.getStatusMission().equals(etatMission.Termine)) {
+			x.setFeedbackNote(FeedbackMission.ETOILE1);
+		}
+		else if (IdNoteMission == 2 && x.getStatusMission().equals(etatMission.Termine)) {
+			x.setFeedbackNote(FeedbackMission.ETOILE2);
+		}
+		else if (IdNoteMission == 3  && x.getStatusMission().equals(etatMission.Termine)) {
+			x.setFeedbackNote(FeedbackMission.ETOILE3);
+		}
+		else if (IdNoteMission == 4 && x.getStatusMission().equals(etatMission.Termine)) {
+			x.setFeedbackNote(FeedbackMission.ETOILE4);
+		}
+		else if (IdNoteMission == 5 && x.getStatusMission().equals(etatMission.Termine)) {
+			x.setFeedbackNote(FeedbackMission.ETOILE5);
+		}
+		else {
+			throw new Exception  ("Sorry la mission n'est pas termineé") ;
+		}
+		
+
+	return	mr.save(x);
+
+	} 
+
+	@PutMapping("/mettreunCommentaire/{idmission}")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public synchronized  Mission  modifierCommentaire( @PathVariable  Long idmission , @RequestBody Mission m) {
+
+		Mission x = mr.findById(idmission).get();
+		
+		x.setCommentaire(m.getCommentaire());
+
+		return	mr.save(x);
+
+		
+	} 
 
 }
