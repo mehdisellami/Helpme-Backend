@@ -59,10 +59,9 @@ public class Controlleur {
 	@PostMapping("/newmission")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
-	public Mission addNewMission(@Valid  @RequestBody Mission m  ) {
+	public Mission addNewMission(@Valid  @RequestBody Mission m) {
 		
-		Mission dem = new Mission();
-		
+		Mission dem = new Mission();	
 		dem.setNomMission(m.getNomMission());
 		dem.setAdressMission(m.getAdressMission());
 		dem.setDateMission(m.getDateMission());
@@ -70,13 +69,25 @@ public class Controlleur {
 		dem.setUserMission(m.getUserMission());
 		dem.setStatusMission(dem.getStatusMission());
 		dem.setFeedbackNote(dem.getFeedbackNote());
-		
+		return 	mr.save(dem);		
+	}
 	
-
-		return 	mr.save(dem);
-		
-		
-		
+	@GetMapping("/getmission/{idMission}")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public synchronized Mission GetMission(@PathVariable Long idMission) {
+		Mission x = mr.findById(idMission).get();
+		return x;
+	}
+	
+	@PostMapping("/editmission")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public synchronized Mission editMission(@Valid  @RequestBody Mission m) {
+		Mission x = mr.findById(m.getIdMission()).get();
+		x.setNomMission(m.getNomMission());
+		x.setDateMission(m.getDateMission());
+		x.setAdressMission(m.getAdressMission());
+		x.setDescription(m.getDescription());
+		return mr.save(x);
 	}
 	
 	@DeleteMapping("/deletemission/{idMission}")
@@ -85,9 +96,6 @@ public class Controlleur {
          return true ;
     }
 	
-	
-	
-
 	@PostMapping("/newuser")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
@@ -172,19 +180,10 @@ public class Controlleur {
 	@PutMapping("/affecterUserMission/{iduser}/{idmission}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public synchronized  Mission  affecterUserMission(@PathVariable Long iduser  , @PathVariable  Long idmission) {
-		
-		
-
 		Mission x = mr.findById(idmission).get();
-		
-		
 		x.setUserMission(ur.findById(iduser).get());
-		
 		x.setStatusMission(etatMission.ACCEPTE);
-
-	return	mr.save(x);
-
-		
+		return	mr.save(x);	
 	} 
 	
 	

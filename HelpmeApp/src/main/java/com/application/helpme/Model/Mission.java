@@ -54,20 +54,10 @@ public class Mission {
 	User userMission ;
 	
 	private String commentaire;
-	
-	
-
-
-	
-
-
-	
-
 
 	public Mission() {
 		
 	}
-
 
 	public Mission(Long idMission, @NotBlank String nomMission, @NotBlank String adressMission, LocalDate dateMission,
 			@NotBlank String description, User userMission) {
@@ -77,15 +67,12 @@ public class Mission {
 		this.adressMission = adressMission;
 		this.dateMission = dateMission;
 		this.description = description;
-		this.userMission = userMission;
-		
+		this.userMission = userMission;	
 	}
-
 
 	public Long getIdMission() {
 		return idMission;
 	}
-
 
 	public void setIdMission(Long idMission) {
 		this.idMission = idMission;
@@ -173,23 +160,12 @@ public class Mission {
 		this.commentaire = commentaire;
 	}
 
+	public String getTel() {
+		return tel;
+	}
 
-	
-	
-	
-	
-
-	
-
-	
-	
-	
-	
-	
-	
-	
-
-	
-	
+	public void setTel(String telephone) {
+		this.tel = telephone;
+	}
 
 }
