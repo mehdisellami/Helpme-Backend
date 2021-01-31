@@ -13,10 +13,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table
@@ -24,9 +27,9 @@ public class Mission {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idMission;
+    //private Long idMission;
 	
-	
+	private int idMission;
 	@NotBlank
     private String nomMission;
 
@@ -55,28 +58,94 @@ public class Mission {
 	
 	private String commentaire;
 
+	@Transient
+	Position pos;
+	
+	
 	public Mission() {
 		
 	}
+	
+	
+	
 
-	public Mission(Long idMission, @NotBlank String nomMission, @NotBlank String adressMission, LocalDate dateMission,
-			@NotBlank String description, User userMission) {
+public Mission(int idMission, @NotBlank String nomMission, @NotBlank String adressMission, Position pos) {
 		super();
 		this.idMission = idMission;
 		this.nomMission = nomMission;
 		this.adressMission = adressMission;
-		this.dateMission = dateMission;
-		this.description = description;
-		this.userMission = userMission;	
+		this.pos = pos;
 	}
 
-	public Long getIdMission() {
+
+
+
+//	public Mission(Long idMission, @NotBlank String nomMission, @NotBlank String adressMission, LocalDate dateMission,
+//			@NotBlank String description, User userMission) {
+//		super();
+//		this.idMission = idMission;
+//		this.nomMission = nomMission;
+//		this.adressMission = adressMission;
+//		this.dateMission = dateMission;
+//		this.description = description;
+//		this.userMission = userMission;	
+//	}
+//
+//	
+//	
+//	public Mission(Long idMission, @NotBlank String nomMission, @NotBlank String adressMission, LocalDate dateMission,
+//			String tel, @NotBlank String description, etatMission statusMission, FeedbackMission feedbackNote,
+//			User userMission, String commentaire, Position pos) {
+//		super();
+//		this.idMission = idMission;
+//		this.nomMission = nomMission;
+//		this.adressMission = adressMission;
+//		this.dateMission = dateMission;
+//		this.tel = tel;
+//		this.description = description;
+//		this.statusMission = statusMission;
+//		this.feedbackNote = feedbackNote;
+//		this.userMission = userMission;
+//		this.commentaire = commentaire;
+//		this.pos = pos;
+//	}
+//
+//	
+//
+//
+//
+//	public Mission(Long idMission, @NotBlank String nomMission, @NotBlank String adressMission, Position pos) {
+//		super();
+//		this.idMission = idMission;
+//		this.nomMission = nomMission;
+//		this.adressMission = adressMission;
+//		this.pos = pos;
+//	}
+//
+//
+//
+//
+//	public Long getIdMission() {
+//		return idMission;
+//	}
+//
+//	public void setIdMission(Long idMission) {
+//		this.idMission = idMission;
+//	}
+
+
+	public int getIdMission() {
 		return idMission;
 	}
 
-	public void setIdMission(Long idMission) {
+
+
+
+	public void setIdMission(int idMission) {
 		this.idMission = idMission;
 	}
+
+
 
 
 	public String getNomMission() {
@@ -167,5 +236,15 @@ public class Mission {
 	public void setTel(String telephone) {
 		this.tel = telephone;
 	}
+
+	public Position getPos() {
+		return pos;
+	}
+
+	public void setPos(Position pos) {
+		this.pos = pos;
+	}
+	
+	
 
 }

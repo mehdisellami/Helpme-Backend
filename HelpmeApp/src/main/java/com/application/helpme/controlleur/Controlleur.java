@@ -74,7 +74,7 @@ public class Controlleur {
 	
 	@GetMapping("/getmission/{idMission}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public synchronized Mission GetMission(@PathVariable Long idMission) {
+	public synchronized Mission GetMission(@PathVariable int idMission) {
 		Mission x = mr.findById(idMission).get();
 		return x;
 	}
@@ -91,7 +91,7 @@ public class Controlleur {
 	}
 	
 	@DeleteMapping("/deletemission/{idMission}")
-    public Boolean deleteMission(@PathVariable long idMission) {
+    public Boolean deleteMission(@PathVariable int idMission) {
          mr.deleteById(idMission);
          return true ;
     }
@@ -151,7 +151,7 @@ public class Controlleur {
 	
 	@GetMapping("/findidUserbyUsername/{username}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public Long findIDuserByusername(@PathVariable String username) {
+	public int findIDuserByusername(@PathVariable String username) {
 		
 		return ur.findIDuserByusername(username );
 		 
@@ -179,7 +179,7 @@ public class Controlleur {
 	
 	@PutMapping("/affecterUserMission/{iduser}/{idmission}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public synchronized  Mission  affecterUserMission(@PathVariable Long iduser  , @PathVariable  Long idmission) {
+	public synchronized  Mission  affecterUserMission(@PathVariable int iduser  , @PathVariable  int idmission) {
 		Mission x = mr.findById(idmission).get();
 		x.setUserMission(ur.findById(iduser).get());
 		x.setStatusMission(etatMission.ACCEPTE);
@@ -189,7 +189,7 @@ public class Controlleur {
 	
 	@PutMapping("/Missiontermine/{idmission}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public synchronized  Mission  terminerMission( @PathVariable  Long idmission) {
+	public synchronized  Mission  terminerMission( @PathVariable  int idmission) {
 
 		Mission x = mr.findById(idmission).get();
 		
@@ -203,7 +203,7 @@ public class Controlleur {
 	
 	@PutMapping("/feedBackMission/{idmission}/{IdNoteMission}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public synchronized  Mission  feedBackMission( @PathVariable  Long idmission , @PathVariable  Long IdNoteMission ) throws Exception {
+	public synchronized  Mission  feedBackMission( @PathVariable  int idmission , @PathVariable  int IdNoteMission ) throws Exception {
 		
 		Mission x = mr.findById(idmission).get();
 		
@@ -234,7 +234,7 @@ public class Controlleur {
 
 	@PutMapping("/mettreunCommentaire/{idmission}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public synchronized  Mission  modifierCommentaire( @PathVariable  Long idmission , @RequestBody Mission m) {
+	public synchronized  Mission  modifierCommentaire( @PathVariable  int idmission , @RequestBody Mission m) {
 
 		Mission x = mr.findById(idmission).get();
 		

@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -19,6 +20,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.NaturalId;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 
+import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -31,7 +33,9 @@ public class User {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    //private Long id;
+	
+	private int id;
 	
     @NotBlank
     @Size(min=3, max = 50)
@@ -60,44 +64,57 @@ public class User {
     	inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-	
+    @Transient
+    Position pos;
 	
 	
 	public User() {
 		super();
 	}
 	
-	public User(String Status) {
-		super();
-	}
-
-	public User(Long id, @NotBlank @Size(min = 3, max = 50) String name,
-			@NotBlank @Size(min = 3, max = 50) String username, @NotBlank @Email String email,
-			@NotBlank String password, @NotBlank String tel) {
+	
+	
+public User(int id, @NotBlank @Size(min = 3, max = 50) String name, Position pos) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.username = username;
-		this.email = email;
-		this.password = password;
-		this.tel=tel;
+		this.pos = pos;
 	}
 
-	
-	public User(@NotBlank @Size(min = 3, max = 50) String name, @NotBlank @Size(min = 3, max = 50) String username,
-			@Email String email, @NotBlank String password, @NotBlank String tel,
-			Set<com.application.helpme.Model.Role> roles) {
-		super();
-		this.name = name;
-		this.username = username;
-		this.email = email;
-		this.password = password;
-		this.tel = tel;
-		this.roles = roles;
-	}
-	
-	
 
+
+
+//	public User(String Status) {
+//		super();
+//	}
+//
+//	public User(Long id, @NotBlank @Size(min = 3, max = 50) String name,
+//			@NotBlank @Size(min = 3, max = 50) String username, @NotBlank @Email String email,
+//			@NotBlank String password, @NotBlank String tel) {
+//		super();
+//		this.id = id;
+//		this.name = name;
+//		this.username = username;
+//		this.email = email;
+//		this.password = password;
+//		this.tel=tel;
+//	}
+//
+//	
+//	public User(@NotBlank @Size(min = 3, max = 50) String name, @NotBlank @Size(min = 3, max = 50) String username,
+//			@Email String email, @NotBlank String password, @NotBlank String tel,
+//			Set<com.application.helpme.Model.Role> roles) {
+//		super();
+//		this.name = name;
+//		this.username = username;
+//		this.email = email;
+//		this.password = password;
+//		this.tel = tel;
+//		this.roles = roles;
+//	}
+//	
+//	
+//
 	public User(@NotBlank @Size(min = 3, max = 50) String name, @NotBlank @Size(min = 3, max = 50) String username,
 			@Email String email, @NotBlank String password, @NotBlank String tel) {
 		super();
@@ -108,13 +125,41 @@ public class User {
 		this.tel = tel;
 	}
 
-	public Long getId() {
-		return id;
-	}
+//	
+//	
+//	public User(Long id, @NotBlank @Size(min = 3, max = 50) String name,
+//			@NotBlank @Size(min = 3, max = 50) String username, @Email String email, @NotBlank String password,
+//			@NotBlank String tel, Set<Role> roles, Position pos) {
+//		super();
+//		this.id = id;
+//		this.name = name;
+//		this.username = username;
+//		this.email = email;
+//		this.password = password;
+//		this.tel = tel;
+//		this.roles = roles;
+//		this.pos = pos;
+//	}
+//
+//	public Long getId() {
+//		return id;
+//	}
+//
+//	public void setId(Long id) {
+//		this.id = id;
+//	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+	public int getId() {
+	return id;
+}
+
+
+
+public void setId(int id) {
+	this.id = id;
+}
+
+
 
 	public String getName() {
 		return name;
@@ -162,6 +207,14 @@ public class User {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	public Position getPos() {
+		return pos;
+	}
+
+	public void setPos(Position pos) {
+		this.pos = pos;
 	}
 	
 	
