@@ -25,7 +25,7 @@ import com.application.helpme.Model.User;
 
 
 @EntityScan(basePackages = {"com.application.helpme.Model"})
-//@ComponentScan("com.application.helpme.controlleur")
+@ComponentScan("com.application.helpme.controlleur")
 
 
 @SpringBootApplication

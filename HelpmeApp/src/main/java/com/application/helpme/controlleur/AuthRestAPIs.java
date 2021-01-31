@@ -38,7 +38,7 @@ import com.application.helpme.security.jwt.JwtProvider;
 @RequestMapping("/api/auth")
 public class AuthRestAPIs {
 
-	@Autowired
+	@Autowired(required = false)
 	AuthenticationManager authenticationManager;
 
 	@Autowired
@@ -50,10 +50,10 @@ public class AuthRestAPIs {
 	
 
 
-	@Autowired
+	@Autowired(required = false)
 	PasswordEncoder encoder;
 
-	@Autowired
+	@Autowired(required = false)
 	JwtProvider jwtProvider;
 
 	@PostMapping("/signin")
