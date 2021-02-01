@@ -35,30 +35,55 @@ public class Agence {
 		super();
 	}
 
-	public Map<Mission,Double> selectionner(User u ,Position p){
-		
-		Map <Mission,Double> res = new HashMap<Mission, Double>();
-		
-		for (Mission m : listeMission) {
-			
-			double d1 = distance(u.getPos(),m.getPos());
-			double d2 = distance(m.getPos(),p);
-			double result=d1+d2;
-			
-				
-		
-				res.put(m, result);
-				
-			
-		}
-		
-
-		res.forEach((k,v) -> System.out.println(k.getNomMission()+"  "+v));
-
-
-		
-		return res;
-	}
+//	public Map<Mission,Double> selectionner(User u ,Position p){
+//		
+//		Map <Mission,Double> res = new HashMap<Mission, Double>();
+//		
+//		for (Mission m : listeMission) {
+//			
+//			double d1 = distance(u.getPos(),m.getPos());
+//			double d2 = distance(m.getPos(),p);
+//			double result=d1+d2;
+//			
+//			
+//			
+//				res.put(m, result);}
+//		
+//			
+//				
+//			
+//	
+//		
+//
+//		res.forEach((k,v) -> System.out.println(k.getNomMission()+"  "+v));
+//
+//
+//		
+//		return res;
+//	}
+	
+	
+	public Map<Mission,Double> selectionner(Position depart ,Position arrivee){
+        Map <Mission,Double> resultat = new HashMap<Mission, Double>();
+        for (Mission m : listeMission) {
+            double d1 = distance(depart,m.getPos());
+            double d2 = distance(m.getPos(),arrivee);
+            double result=d1+d2;
+            System.out.println("La mission " + m.getNomMission() + " se trouve a " + d1 + " km de ma position et a " + result + " km de mon point d'arrivee");
+            
+            if(result <12) {
+            	System.out.println("Le nom de la mission pris " + m.getNomMission());
+            	   resultat.put(m, result);
+            	   
+            	
+            }
+            else {System.out.println("la les Mission est trop loin ");}
+            
+         
+        }
+      //  resultat.forEach((k,v) -> System.out.println(k.getNomMission()+"  "+v));
+        return resultat;
+    }
 	
 //	public String convertWithStream(Map<Mission, Double> res) {
 //	    String mapAsString = res.keySet().stream()

@@ -43,10 +43,29 @@ public class HelpmeAppApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) {
 		SpringApplication.run(HelpmeAppApplication.class, args);
 		
+		//Creation Map ma Position , position de Alexis , ou on veut aller
 		Map<Double, Double> longlatMaPosition = new HashMap<Double, Double>();
 		longlatMaPosition.put(2.390055, 48.8077584);
+		
+		Map<Double, Double> longlatAlexisSidate = new HashMap<Double, Double>();
+		longlatAlexisSidate.put(2.200134, 48.92714);
+		
+		
+		Map<Double, Double> longlatBaAdja = new HashMap<Double, Double>();
+		longlatBaAdja.put(1.802980, 48.988320);
+		
+		
+		Map<Double, Double> longlatOuJeveuxAller = new HashMap<Double, Double>();
+		longlatOuJeveuxAller.put(2.2437287, 48.8359862);
 
+		//Creation des Positions 
 		Position positonUser = new Position(longlatMaPosition);
+		
+		Position positionAlexisSidate = new Position(longlatAlexisSidate);
+		
+		Position positionBaAdja = new Position(longlatBaAdja);
+		
+		Position positionOujeveuxaller = new Position(longlatOuJeveuxAller);
 
 		
 		Map<Double, Double> longlatMission = new HashMap<Double, Double>();
@@ -79,14 +98,37 @@ public class HelpmeAppApplication extends SpringBootServletInitializer {
 		
 		Pref vieuPref =new Pref();
 		
-		User u1 = new  User(1, "Mehdi SELLAMI", positonUser,prefJeune,m2);
+		Pref vieuxPref2 =new Pref();
+		
+		User u1 = new  User();
+		u1.setId(1);
+		u1.setName("Mehdi SELLAMI");
+		u1.setPos(positonUser);
+		u1.setPrefUser(prefJeune);
+		u1.setUserMissionCreateur(m1);
 		
 		
 		
 		
-		User u2 = new  User(2, "Alexis Sidate", positonUser,vieuPref);
+		User u2 = new  User();
+		u2.setId(2);
+		u2.setName("Alexis Sidate");
+		u2.setPos(positionAlexisSidate);
+		u2.setPrefUser(prefJeune2);
 		
-		User u3 = new  User(1, "Chelson Supreme", positonUser,vieuPref,m1);
+		
+		
+		User u3 = new  User();
+		u3.setId(3);
+		u3.setName("Chelson Supreme");
+		u3.setPrefUser(vieuPref);
+		u3.setUserMissionCreateur(m2);
+		
+		User u4= new User();
+		u4.setId(4);
+		u4.setName("Ba Adja");
+		u4.setPos(positionBaAdja);
+		u4.setPrefUser(vieuxPref2);
 		
 		List <Mission> listeMission = Arrays.asList(u1.getUserMissionCreateur(),u3.getUserMissionCreateur());
 	
@@ -97,17 +139,13 @@ public class HelpmeAppApplication extends SpringBootServletInitializer {
 		
 		Info infoUserMatchMission = new Info();
 		
-		if (infoUserMatchMission.aime(u1,u2)) {
+		if (infoUserMatchMission.aime(u3,u4)) {
 			
-			agenceChercher.selectionner(u2, positonUser);
+			agenceChercher.selectionner(u4.getPos(), positionOujeveuxaller);
 		}
 		
 		
-		if (infoUserMatchMission.aime(u3,u2)) {
-					
-			agenceChercher.selectionner(u2, positonUser);
-				}
-		
+	
 		
 		
 		
