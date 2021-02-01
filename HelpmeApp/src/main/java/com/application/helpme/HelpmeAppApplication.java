@@ -19,8 +19,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 
 import com.application.helpme.Model.Agence;
+import com.application.helpme.Model.Info;
 import com.application.helpme.Model.Mission;
 import com.application.helpme.Model.Position;
+import com.application.helpme.Model.Pref;
 import com.application.helpme.Model.User;
 
 
@@ -65,29 +67,46 @@ public class HelpmeAppApplication extends SpringBootServletInitializer {
 		Position p3 = new Position(longlatMission3);
 				
 	
-		Mission m1 = new Mission(1, "Hello", "85 Rue Marat",  p1);
+		Mission m1 = new Mission(1, "Partir à Carrefour Market", "22 Promenée Marat, 94200 Ivry-sur-Seine",  p1);
 		
 		Mission m2 = new Mission(2, "Partir à falafel café", "176 Rue Saint Martin 75003",  p2);
 		
 		Mission m3 = new Mission(3, " Nanterre", "Université Paris Nanterre",  p3);
 		
+		Pref prefJeune =new Pref(true);
+			
+		Pref prefJeune2 =new Pref(true);
 		
-		User u1 = new  User(1, "Mehdi SELLAMI", positonUser);
+		Pref vieuPref =new Pref();
+		
+		User u1 = new  User(1, "Mehdi SELLAMI", positonUser,prefJeune,m2);
 		
 		
-		List <Mission> listeMission = new ArrayList<Mission>();
-		listeMission.add(m1);
-		listeMission.add(m2);
-		listeMission.add(m3);
 		
 		
+		User u2 = new  User(2, "Alexis Sidate", positonUser,vieuPref);
+		
+		User u3 = new  User(1, "Chelson Supreme", positonUser,vieuPref,m1);
+		
+		List <Mission> listeMission = Arrays.asList(u1.getUserMissionCreateur(),u3.getUserMissionCreateur());
+	
 		
 		Agence agenceChercher = new Agence();
-		
-		
+				
 		agenceChercher.setListeMission(listeMission);
 		
-		agenceChercher.selectionner(u1, positonUser);
+		Info infoUserMatchMission = new Info();
+		
+		if (infoUserMatchMission.aime(u1,u2)) {
+			
+			agenceChercher.selectionner(u2, positonUser);
+		}
+		
+		
+		if (infoUserMatchMission.aime(u3,u2)) {
+					
+			agenceChercher.selectionner(u2, positonUser);
+				}
 		
 		
 		

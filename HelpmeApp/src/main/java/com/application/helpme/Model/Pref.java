@@ -7,9 +7,28 @@ public class Pref {
 	private boolean jeune;
 
 	public Pref() {
-		super();
+		this.vieux=true;
+		this.jeune=false;
 		// TODO Auto-generated constructor stub
 	}
+	
+
+	public Pref(boolean vieux, boolean jeune) {
+		super();
+		this.vieux = vieux;
+		this.jeune = jeune;
+	}
+
+
+	public Pref(boolean jeune) {
+		
+		this.jeune = true;
+		this.vieux=false;
+	}
+	
+
+
+
 
 	public boolean isVieux() {
 		return vieux;

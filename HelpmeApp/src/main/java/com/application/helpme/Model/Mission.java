@@ -1,7 +1,9 @@
 package com.application.helpme.Model;
 
 import java.time.LocalDate;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
@@ -61,6 +64,10 @@ public class Mission {
 	@Transient
 	Position pos;
 	
+
+	
+
+	
 	
 	public Mission() {
 		
@@ -76,6 +83,31 @@ public Mission(int idMission, @NotBlank String nomMission, @NotBlank String adre
 		this.adressMission = adressMission;
 		this.pos = pos;
 	}
+
+
+
+
+public Mission(@NotBlank String nomMission, @NotBlank String adressMission, LocalDate dateMission, String tel,
+		@NotBlank String description, etatMission statusMission, FeedbackMission feedbackNote, User userMission,
+		String commentaire, Position pos) {
+	super();
+	this.nomMission = nomMission;
+	this.adressMission = adressMission;
+	this.dateMission = dateMission;
+	this.tel = tel;
+	this.description = description;
+	this.statusMission = statusMission;
+	this.feedbackNote = feedbackNote;
+	this.userMission = userMission;
+	this.commentaire = commentaire;
+	this.pos = pos;
+	
+}
+
+
+
+
+
 
 
 
@@ -244,6 +276,21 @@ public Mission(int idMission, @NotBlank String nomMission, @NotBlank String adre
 	public void setPos(Position pos) {
 		this.pos = pos;
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
 	
 	
 

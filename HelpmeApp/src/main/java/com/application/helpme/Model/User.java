@@ -3,6 +3,7 @@ package com.application.helpme.Model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Email;
@@ -19,6 +22,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.NaturalId;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+
 
 import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -68,8 +72,15 @@ public class User {
     Position pos;
     
     
-   
+    @Transient
+    Pref prefUser;
     
+    
+	@ManyToOne (fetch = FetchType.LAZY)
+	@JoinColumn(name = "userMissionCreateur")
+	Mission userMissionCreateur;
+    
+
 	
 	
 	public User() {
@@ -128,6 +139,8 @@ public User(int id, @NotBlank @Size(min = 3, max = 50) String name, Position pos
 		this.password = password;
 		this.tel = tel;
 	}
+	
+	
 
 //	
 //	
@@ -152,9 +165,93 @@ public User(int id, @NotBlank @Size(min = 3, max = 50) String name, Position pos
 //	public void setId(Long id) {
 //		this.id = id;
 //	}
+	
+	
+	
 
 	public int getId() {
 	return id;
+}
+
+
+
+public User(@NotBlank @Size(min = 3, max = 50) String name, @NotBlank @Size(min = 3, max = 50) String username,
+		@Email String email, @NotBlank String password, @NotBlank String tel, Set<Role> roles, Position pos,
+		Pref prefUser) {
+	super();
+	this.name = name;
+	this.username = username;
+	this.email = email;
+	this.password = password;
+	this.tel = tel;
+	this.roles = roles;
+	this.pos = pos;
+	this.prefUser = prefUser;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+public User(@NotBlank @Size(min = 3, max = 50) String name, @NotBlank @Size(min = 3, max = 50) String username,
+		@Email String email, @NotBlank String password, @NotBlank String tel, Set<Role> roles, Position pos,
+		Pref prefUser, Mission userMissionCreateur) {
+	super();
+	this.name = name;
+	this.username = username;
+	this.email = email;
+	this.password = password;
+	this.tel = tel;
+	this.roles = roles;
+	this.pos = pos;
+	this.prefUser = prefUser;
+	this.userMissionCreateur = userMissionCreateur;
+}
+
+
+
+
+public User(int id, @NotBlank @Size(min = 3, max = 50) String name, Position pos, Pref prefUser,
+		Mission userMissionCreateur) {
+	super();
+	this.id = id;
+	this.name = name;
+	this.pos = pos;
+	this.prefUser = prefUser;
+	this.userMissionCreateur = userMissionCreateur;
+}
+
+
+
+public User(int id, @NotBlank @Size(min = 3, max = 50) String name, Position pos, Pref prefUser) {
+	super();
+	this.id = id;
+	this.name = name;
+	this.pos = pos;
+	this.prefUser = prefUser;
+}
+
+
+
+
+
+
+public User(int id, @NotBlank @Size(min = 3, max = 50) String name, @NotBlank @Size(min = 3, max = 50) String username,
+		@Email String email, @NotBlank String password, @NotBlank String tel) {
+	super();
+	this.id = id;
+	this.name = name;
+	this.username = username;
+	this.email = email;
+	this.password = password;
+	this.tel = tel;
 }
 
 
@@ -220,7 +317,36 @@ public void setId(int id) {
 	public void setPos(Position pos) {
 		this.pos = pos;
 	}
-	
+
+
+
+	public Pref getPrefUser() {
+		return prefUser;
+	}
+
+
+
+	public void setPrefUser(Pref prefUser) {
+		this.prefUser = prefUser;
+	}
+
+
+
+	public Mission getUserMissionCreateur() {
+		return userMissionCreateur;
+	}
+
+
+
+	public void setUserMissionCreateur(Mission userMissionCreateur) {
+		this.userMissionCreateur = userMissionCreateur;
+	}
+
+
+
+
+
+
 	
 	
 	
