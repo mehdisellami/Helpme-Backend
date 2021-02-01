@@ -35,10 +35,11 @@ import com.application.helpme.security.jwt.JwtProvider;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
+
 @RequestMapping("/api/auth")
 public class AuthRestAPIs {
 
-	@Autowired(required = false)
+	@Autowired
 	AuthenticationManager authenticationManager;
 
 	@Autowired
@@ -50,10 +51,10 @@ public class AuthRestAPIs {
 	
 
 
-	@Autowired(required = false)
+	@Autowired
 	PasswordEncoder encoder;
 
-	@Autowired(required = false)
+	@Autowired
 	JwtProvider jwtProvider;
 
 	@PostMapping("/signin")
