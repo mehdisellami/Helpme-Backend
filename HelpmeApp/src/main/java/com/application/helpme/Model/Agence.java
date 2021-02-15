@@ -15,6 +15,8 @@ public class Agence {
 	
 	List <Mission> listeMission= new ArrayList<>();
 	
+	
+	
 
 	public Agence(List<Mission> listeMission) {
 		super();
@@ -93,6 +95,20 @@ public class Agence {
 		return listeMission.stream().filter(m -> distance(ul, m) <= b).collect(Collectors.toList());
 		
 		
+	}
+	
+	public boolean estCompatible(UserLocalise userpref , Mission mpref) {
+		
+		boolean rtr=false;
+		
+		if (userpref.getUserPos().getPrefUser().isJeune() &&  mpref.getPrefMission().isJeune() ) {
+			userpref.getUserPos().getPrefUser().accepte(mpref.getPrefMission());
+			rtr = true;			
+		}
+		else if (userpref.getUserPos().getPrefUser().isVieux() &&  mpref.getPrefMission().isVieux() ) {	
+			rtr = true;
+		}
+		return rtr;
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.application.helpme.Model;
 
+import java.util.prefs.PreferenceChangeEvent;
+
 public class Pref {
 	
 	private boolean vieux;
@@ -47,6 +49,12 @@ public class Pref {
 	}
 	
 	
+	public boolean accepte(Pref o) {
+		
+		
+	
+		return true; 
+	}
 	
 	
 	

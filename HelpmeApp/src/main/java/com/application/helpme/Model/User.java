@@ -99,37 +99,6 @@ public User(int id, @NotBlank @Size(min = 3, max = 50) String name, Position pos
 
 
 
-//	public User(String Status) {
-//		super();
-//	}
-//
-//	public User(Long id, @NotBlank @Size(min = 3, max = 50) String name,
-//			@NotBlank @Size(min = 3, max = 50) String username, @NotBlank @Email String email,
-//			@NotBlank String password, @NotBlank String tel) {
-//		super();
-//		this.id = id;
-//		this.name = name;
-//		this.username = username;
-//		this.email = email;
-//		this.password = password;
-//		this.tel=tel;
-//	}
-//
-//	
-//	public User(@NotBlank @Size(min = 3, max = 50) String name, @NotBlank @Size(min = 3, max = 50) String username,
-//			@Email String email, @NotBlank String password, @NotBlank String tel,
-//			Set<com.application.helpme.Model.Role> roles) {
-//		super();
-//		this.name = name;
-//		this.username = username;
-//		this.email = email;
-//		this.password = password;
-//		this.tel = tel;
-//		this.roles = roles;
-//	}
-//	
-//	
-//
 	public User(@NotBlank @Size(min = 3, max = 50) String name, @NotBlank @Size(min = 3, max = 50) String username,
 			@Email String email, @NotBlank String password, @NotBlank String tel) {
 		super();
@@ -139,34 +108,6 @@ public User(int id, @NotBlank @Size(min = 3, max = 50) String name, Position pos
 		this.password = password;
 		this.tel = tel;
 	}
-	
-	
-
-//	
-//	
-//	public User(Long id, @NotBlank @Size(min = 3, max = 50) String name,
-//			@NotBlank @Size(min = 3, max = 50) String username, @Email String email, @NotBlank String password,
-//			@NotBlank String tel, Set<Role> roles, Position pos) {
-//		super();
-//		this.id = id;
-//		this.name = name;
-//		this.username = username;
-//		this.email = email;
-//		this.password = password;
-//		this.tel = tel;
-//		this.roles = roles;
-//		this.pos = pos;
-//	}
-//
-//	public Long getId() {
-//		return id;
-//	}
-//
-//	public void setId(Long id) {
-//		this.id = id;
-//	}
-	
-	
 	
 
 	public int getId() {

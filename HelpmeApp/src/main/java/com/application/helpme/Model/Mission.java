@@ -64,9 +64,8 @@ public class Mission extends GeoElement {
 	@Transient
 	Position pos;
 	
-
-	
-
+	@Transient
+    Pref prefMission;
 	
 	
 	public Mission() {
@@ -280,9 +279,25 @@ public Mission(@NotBlank String nomMission, @NotBlank String adressMission, Loca
 
 
 
+	public Pref getPrefMission() {
+		return prefMission;
+	}
 
 
 
+
+	public void setPrefMission(Pref prefMission) {
+		this.prefMission = prefMission;
+	}
+
+
+	
+
+
+
+
+
+	
 
 
 
