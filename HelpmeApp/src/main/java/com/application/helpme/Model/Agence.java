@@ -110,5 +110,11 @@ public class Agence {
 		}
 		return rtr;
 	}
+	
+	public <T> List<Mission> findMission(UserLocalise ul , Contrainte  c , T v){
+		
+		return listeMission.stream().filter(m -> c.test(ul, m, v)).collect(Collectors.toList());
+		
+	}
 
 }

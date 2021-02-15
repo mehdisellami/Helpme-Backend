@@ -48,7 +48,7 @@ public class GeoElement extends Position {
 
 	
 	public double distance(GeoElement o) {
-	return	this.pos.distance(o.getUserLocalise(), o.getMissionLocalise());
+	return	this.pos().distance(o.getUserLocalise(), o.getMissionLocalise());
 	}
 
 	
