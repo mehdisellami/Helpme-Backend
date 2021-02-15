@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table
-public class Mission {
+public class Mission extends GeoElement {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

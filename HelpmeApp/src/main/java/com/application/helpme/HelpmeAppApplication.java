@@ -43,47 +43,23 @@ public class HelpmeAppApplication extends SpringBootServletInitializer {
 	public static void main(String[] args) {
 		SpringApplication.run(HelpmeAppApplication.class, args);
 		
-		//Creation Map ma Position , position de Alexis , ou on veut aller
-		Map<Double, Double> longlatMaPosition = new HashMap<Double, Double>();
-		longlatMaPosition.put(2.390055, 48.8077584);
-		
-		Map<Double, Double> longlatAlexisSidate = new HashMap<Double, Double>();
-		longlatAlexisSidate.put(2.200134, 48.92714);
-		
-		
-		Map<Double, Double> longlatBaAdja = new HashMap<Double, Double>();
-		longlatBaAdja.put(1.802980, 48.988320);
-		
-		
-		Map<Double, Double> longlatOuJeveuxAller = new HashMap<Double, Double>();
-		longlatOuJeveuxAller.put(2.2437287, 48.8359862);
 
 		//Creation des Positions 
-		Position positonUser = new Position(longlatMaPosition);
+		Position positonUser = new Position(2.390055,48.8077584);
 		
-		Position positionAlexisSidate = new Position(longlatAlexisSidate);
+		Position positionAlexisSidate = new Position(2.200134,48.92714);
 		
-		Position positionBaAdja = new Position(longlatBaAdja);
+		Position positionBaAdja = new Position(1.802980,48.988320);
 		
-		Position positionOujeveuxaller = new Position(longlatOuJeveuxAller);
-
+		Position positionOujeveuxaller = new Position(2.2437287,48.8359862);
+	
+	
+		//Position des missions
+		Position p1 = new Position(2.3794244,48.8073919);
 		
-		Map<Double, Double> longlatMission = new HashMap<Double, Double>();
-		longlatMission.put(2.3794244, 48.8073919);
+		Position p2 = new Position(2.3500595,48.862501);
 		
-		Map<Double, Double> longlatMission2 = new HashMap<Double, Double>();
-		longlatMission2.put(2.3500595, 48.862501);
-		
-		Map<Double, Double> longlatMission3 = new HashMap<Double, Double>();
-		longlatMission3.put(2.2133373, 48.903165);
-		
-		
-		
-		Position p1 = new Position(longlatMission);
-		
-		Position p2 = new Position(longlatMission2);
-		
-		Position p3 = new Position(longlatMission3);
+		Position p3 = new Position(2.2133373,48.903165);
 				
 	
 		Mission m1 = new Mission(1, "Partir à Carrefour Market", "22 Promenée Marat, 94200 Ivry-sur-Seine",  p1);
@@ -121,7 +97,7 @@ public class HelpmeAppApplication extends SpringBootServletInitializer {
 		User u3 = new  User();
 		u3.setId(3);
 		u3.setName("Chelson Supreme");
-		u3.setPrefUser(vieuPref);
+		u3.setPrefUser(prefJeune2);
 		u3.setUserMissionCreateur(m2);
 		
 		User u4= new User();
@@ -139,9 +115,9 @@ public class HelpmeAppApplication extends SpringBootServletInitializer {
 		
 		Info infoUserMatchMission = new Info();
 		
-		if (infoUserMatchMission.aime(u3,u4)) {
+		if (infoUserMatchMission.aime(u3,u1)) {
 			
-			agenceChercher.selectionner(u4.getPos(), positionOujeveuxaller);
+			agenceChercher.selectionner(u1.getPos(), positionOujeveuxaller);
 		}
 		
 		
