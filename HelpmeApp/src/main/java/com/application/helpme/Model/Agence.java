@@ -104,16 +104,23 @@ public class Agence {
 		if (userpref.getUserPos().getPrefUser().isJeune() &&  mpref.getPrefMission().isJeune() ) {
 			userpref.getUserPos().getPrefUser().accepte(mpref.getPrefMission());
 			rtr = true;			
+			
+			System.out.println("L'utilisi est compatible avec la mission");
 		}
 		else if (userpref.getUserPos().getPrefUser().isVieux() &&  mpref.getPrefMission().isVieux() ) {	
 			rtr = true;
+			System.out.println("L'utilisi est compatible avec la mission && VIEUX");
 		}
+		
+		else {System.out.println("L'utilisi n'est pas compatible avec la mission");}
 		return rtr;
 	}
 	
 	public <T> List<Mission> findMission(UserLocalise ul , Contrainte  c , T v){
 		
-		return listeMission.stream().filter(m -> c.test(ul, m, v)).collect(Collectors.toList());
+		return listeMission.stream()
+				.filter(m -> c.test(ul, m, v))
+				.collect(Collectors.toList());
 		
 	}
 

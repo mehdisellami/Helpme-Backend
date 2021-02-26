@@ -16,5 +16,10 @@ public class  Contrainte  <T> implements IContrainte<T> {
 		
 		return rtr;
 	}
+	
+	public boolean and(Contrainte c) {
+		
+		return true;
+	}
 
 }

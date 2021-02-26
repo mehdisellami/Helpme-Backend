@@ -24,6 +24,7 @@ import com.application.helpme.Model.Mission;
 import com.application.helpme.Model.Position;
 import com.application.helpme.Model.Pref;
 import com.application.helpme.Model.User;
+import com.application.helpme.Model.UserLocalise;
 
 
 @EntityScan(basePackages = {"com.application.helpme.Model"})
@@ -60,6 +61,14 @@ public class HelpmeAppApplication extends SpringBootServletInitializer {
 		Position p2 = new Position(2.3500595,48.862501);
 		
 		Position p3 = new Position(2.2133373,48.903165);
+		
+		Pref prefJeune =new Pref(true);
+		
+		Pref prefJeune2 =new Pref(true);
+		
+		Pref vieuPref =new Pref();
+		
+		Pref vieuxPref2 =new Pref();
 				
 	
 		Mission m1 = new Mission(1, "Partir à Carrefour Market", "22 Promenée Marat, 94200 Ivry-sur-Seine",  p1);
@@ -67,14 +76,14 @@ public class HelpmeAppApplication extends SpringBootServletInitializer {
 		Mission m2 = new Mission(2, "Partir à falafel café", "176 Rue Saint Martin 75003",  p2);
 		
 		Mission m3 = new Mission(3, " Nanterre", "Université Paris Nanterre",  p3);
+		m3.setIdMission(3);
+		m3.setNomMission("Nanterre");
+		m3.setAdressMission("Université Paris Nanterre");
+		m3.setPos(p3);
+		m3.setPrefMission(prefJeune2);
 		
-		Pref prefJeune =new Pref(true);
-			
-		Pref prefJeune2 =new Pref(true);
 		
-		Pref vieuPref =new Pref();
 		
-		Pref vieuxPref2 =new Pref();
 		
 		User u1 = new  User();
 		u1.setId(1);
@@ -83,6 +92,9 @@ public class HelpmeAppApplication extends SpringBootServletInitializer {
 		u1.setPrefUser(prefJeune);
 		u1.setUserMissionCreateur(m1);
 		
+		
+		UserLocalise u1Localise = new UserLocalise();
+		u1Localise.setUserPos(u1);
 		
 		
 		
@@ -104,7 +116,11 @@ public class HelpmeAppApplication extends SpringBootServletInitializer {
 		u4.setId(4);
 		u4.setName("Ba Adja");
 		u4.setPos(positionBaAdja);
-		u4.setPrefUser(vieuxPref2);
+		u4.setPrefUser(prefJeune2);
+		
+		
+		UserLocalise u4Localise = new UserLocalise();
+			u4Localise.setUserPos(u4);
 		
 		List <Mission> listeMission = Arrays.asList(u1.getUserMissionCreateur(),u3.getUserMissionCreateur());
 	
@@ -113,11 +129,12 @@ public class HelpmeAppApplication extends SpringBootServletInitializer {
 				
 		agenceChercher.setListeMission(listeMission);
 		
-		Info infoUserMatchMission = new Info();
+
+		System.out.println(listeMission);
 		
-		if (infoUserMatchMission.aime(u3,u1)) {
-			
-			agenceChercher.selectionner(u1.getPos(), positionOujeveuxaller);
+		
+		if(agenceChercher.estCompatible(u1Localise, m3)) {
+			agenceChercher.ListeMission(u1Localise, 15);
 		}
 		
 		

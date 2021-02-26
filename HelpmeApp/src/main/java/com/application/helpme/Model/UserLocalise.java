@@ -1,6 +1,6 @@
 package com.application.helpme.Model;
 
-public class UserLocalise  extends GeoElement {
+public class UserLocalise  extends GeoElement  {
 
 		User userPos;
 
