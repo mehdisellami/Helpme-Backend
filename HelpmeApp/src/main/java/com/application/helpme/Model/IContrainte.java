@@ -5,12 +5,14 @@ public interface IContrainte <T> {
 	
 	
 	
-	boolean test(UserLocalise ul , Mission m  , T i);
 	
-	default boolean and(Contrainte<T> c) {
+	
+	default boolean and(Contrainte c) {
 	
 		return true;
 	}
+
+	boolean test(UserLocalise ul, Mission m, double b);
 	
 
 

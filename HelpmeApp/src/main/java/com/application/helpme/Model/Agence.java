@@ -85,6 +85,7 @@ public class Agence {
 //	}
 	
 	public double distance (UserLocalise ul , Mission m ) {
+		System.out.println("Methode distance classe Agence lancé");
 		return ul.distance(m);
 	}
 	
@@ -116,12 +117,13 @@ public class Agence {
 		return rtr;
 	}
 	
-	public <T> List<Mission> findMission(UserLocalise ul , Contrainte  c , T v){
+	public <T> List<Mission> findMission(UserLocalise ul , Contrainte  c , double v){
 		
 		return listeMission.stream()
 				.filter(m -> c.test(ul, m, v))
 				.collect(Collectors.toList());
 		
 	}
+	
 
 }

@@ -2,7 +2,7 @@ package com.application.helpme.Model;
 
 import java.util.Map;
 
-public class GeoElement extends Position {
+public class GeoElement  {
 	
 	
 	Position pos;
@@ -17,10 +17,7 @@ public class GeoElement extends Position {
 		// TODO Auto-generated constructor stub
 	}
 
-	public GeoElement(Double l, Double lat) {
-		super(l, lat);
-		// TODO Auto-generated constructor stub
-	}
+
 	
 	public Position pos() {
 		
@@ -48,7 +45,8 @@ public class GeoElement extends Position {
 
 	
 	public double distance(GeoElement o) {
-	return	this.pos().distance(o.getUserLocalise(), o.getMissionLocalise());
+		System.out.println("Methode distance classe GeoElement lancé");
+	return	this.pos().distance(o.pos());
 	}
 
 	

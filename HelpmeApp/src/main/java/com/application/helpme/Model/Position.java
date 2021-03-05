@@ -4,11 +4,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-public class Position {
+public class Position extends GeoElement {
 
 	
 	private Double Long;
 	private Double Lat;
+	
+	
 	
 
 	public Position() {
@@ -35,13 +37,16 @@ public class Position {
 
 
 
-	public double distance(UserLocalise ul , Mission m) {
-		double long1 = ul.getLong();
+	public double distance(Position p1 ) {
 		
-		double lat1= ul.getLat();
 		
-		double long2 =m.getLong() ; 
-		double lat2=m.getLat();
+		double long1 = p1.getUserLocalise().getUserPos().getPos().getLong();
+		System.out.println(long1);
+		
+		double lat1= p1.getUserLocalise().getUserPos().getPos().getLat();
+		
+		double long2 =p1.getMissionLocalise().getPos().getLong() ; 
+		double lat2=p1.getMissionLocalise().getPos().getLat();
 	
 		
 		double p = 0.017453292519943295;    // Math.PI / 180
@@ -49,6 +54,8 @@ public class Position {
 	    double a = 0.5- Math.cos((lat2 - lat1) * p)/2 + Math.cos(lat1 * p) * Math.cos(lat2 * p) * (1 - Math.cos((long2 - long1) * p))/2;
 	    		
 	    double result = Math.round( 12742 * Math.asin(Math.sqrt(a)));
+	    
+	    System.out.println("Methode distance classe Position lancé");
 	    return result;  // 2 * R; R = 6371 km		
 	}
 	

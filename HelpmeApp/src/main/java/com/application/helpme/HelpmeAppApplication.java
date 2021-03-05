@@ -19,6 +19,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 
 import com.application.helpme.Model.Agence;
+import com.application.helpme.Model.GeoElement;
 import com.application.helpme.Model.Info;
 import com.application.helpme.Model.Mission;
 import com.application.helpme.Model.Position;
@@ -75,7 +76,7 @@ public class HelpmeAppApplication extends SpringBootServletInitializer {
 		
 		Mission m2 = new Mission(2, "Partir à falafel café", "176 Rue Saint Martin 75003",  p2);
 		
-		Mission m3 = new Mission(3, " Nanterre", "Université Paris Nanterre",  p3);
+		Mission m3 = new Mission();
 		m3.setIdMission(3);
 		m3.setNomMission("Nanterre");
 		m3.setAdressMission("Université Paris Nanterre");
@@ -130,15 +131,21 @@ public class HelpmeAppApplication extends SpringBootServletInitializer {
 		agenceChercher.setListeMission(listeMission);
 		
 
-		System.out.println(listeMission);
-		
-		
-		if(agenceChercher.estCompatible(u1Localise, m3)) {
-			agenceChercher.ListeMission(u1Localise, 15);
-		}
-		
-		
 	
+		
+		agenceChercher.estCompatible(u1Localise, m3);
+		
+		GeoElement g1 = new GeoElement();
+		g1.setMissionLocalise(m3);
+		g1.setUserLocalise(u1Localise);
+		
+		
+	//	System.out.println(agenceChercher.distance(u1Localise, m3));
+	
+			
+		
+		
+		
 		
 		
 		
