@@ -142,13 +142,6 @@ public class HelpmeAppApplication extends SpringBootServletInitializer {
 		
 	//	System.out.println(agenceChercher.distance(u1Localise, m3));
 	
-			
-		
-		
-		
-		
-		
-		
 		
 	}
 

@@ -2,6 +2,7 @@ package com.application.helpme.controlleur;
 
 
 import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +33,14 @@ import com.application.helpme.Model.etatMission;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -46,7 +55,6 @@ public class Controlleur {
 	
 	@Autowired
 	userRepository ur;
-
 	
 	@GetMapping("/test")
 	@PreAuthorize("hasRole('ADMIN')")
@@ -54,7 +62,6 @@ public class Controlleur {
 		return "HelpME Application Université Paris Nanterre";
 	}
 
-	
 	
 	@PostMapping("/newmission")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
@@ -68,8 +75,8 @@ public class Controlleur {
 		dem.setDescription(m.getDescription());
 		dem.setUserMission(m.getUserMission());
 		dem.setStatusMission(dem.getStatusMission());
-		dem.setFeedbackNote(dem.getFeedbackNote());
-		return 	mr.save(dem);		
+		dem.setFeedbackNote(dem.getFeedbackNote());	
+        return 	mr.save(dem);
 	}
 	
 	@GetMapping("/getmission/{idMission}")
@@ -110,8 +117,6 @@ public class Controlleur {
 		
 		usr.setTel(u.getTel());
 		return 	ur.save(usr);
-		
-		
 	}
 	
 	
