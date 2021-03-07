@@ -104,7 +104,7 @@ public class Controlleur {
 				m.getAdressMission() + nl +"Date de la mission : " + m.getDateMission() + nl + "Description : " + m.getDescription() + ".";
 		Email e = new Email("sidatealexis@gmail.com","Création de la mission " + m.getNomMission() , messagemail);
 		//Email e = new Email(m.getUserMission().getEmail(),"Création de mission", messagemail);
-		sendEmail(e);
+		//sendEmail(e);
 		
         return 	mr.save(dem);
 	}
@@ -129,7 +129,7 @@ public class Controlleur {
 				m.getAdressMission() + nl +"Date de la mission : " + m.getDateMission() + nl + "Description : " + m.getDescription() + ".";
 		Email e = new Email("sidatealexis@gmail.com","Modification de la mission " + m.getNomMission() , messagemail);
 		//Email e = new Email(m.getUserMission().getEmail(),"Modification de la mission" + m.getNomMission() , messagemail);
-		sendEmail(e);
+		//sendEmail(e);
 		
 		return mr.save(x);
 	}
@@ -141,7 +141,7 @@ public class Controlleur {
         String messagemail = "Votre mission " + x.getNomMission() + " a bien été supprimée";
  		Email e = new Email("sidatealexis@gmail.com","Suppression de la mission " + x.getNomMission() , messagemail);
  		//Email e = new Email(x.getUserMission().getEmail(),"Création de mission", messagemail);
- 		sendEmail(e);
+ 		//sendEmail(e);
  		
  		mr.deleteById(idMission);
          return true ;
@@ -156,7 +156,7 @@ public class Controlleur {
 		String messagemail = "Votre compte HelpMe a bien été créé"+ nl + "Identifiant :" + u.getUsername() ;
  		Email e = new Email("sidatealexis@gmail.com","Nouveau compte HelpMe ", messagemail);
  		//Email e = new Email(u.getEmail(),"Nouveau compte HelpMe ", messagemail);
- 		sendEmail(e);
+ 		//sendEmail(e);
 		return 	ur.save(usr);
 	}
 	
@@ -213,7 +213,7 @@ public class Controlleur {
 		String messagemail = "Votre mission " + x.getNomMission() + " a été prise en charge par ";
  		Email e = new Email("sidatealexis@gmail.com","Votre mission " + x.getNomMission() + " a été acceptée", messagemail);
  		//Email e = new Email(x.getUserMission().getEmail(),"Nouveau compte HelpMe ", messagemail);
- 		sendEmail(e);
+ 		//sendEmail(e);
  		
 		return	mr.save(x);	
 	}
@@ -252,7 +252,7 @@ public class Controlleur {
 		String messagemail = "Vous a attribué une note de " + IdNoteMission + " sur 5 pour la mission" + x.getNomMission() ;
  		Email e = new Email("sidatealexis@gmail.com","Feedback mission" + x.getNomMission(), messagemail);
  		//Email e = new Email(x.getUserMission().getEmail(),"Nouveau compte HelpMe ", messagemail);
- 		sendEmail(e);
+ 		//sendEmail(e);
  		
 		return	mr.save(x);
 	} 
@@ -266,7 +266,7 @@ public class Controlleur {
 		String messagemail = "Vous avez recu un nouveau commentaire pour la mission " + x.getNomMission() + " : " + nl + nl + x.getCommentaire();
  		Email e = new Email("sidatealexis@gmail.com","Feedback mission" + x.getNomMission(), messagemail);
  		//Email e = new Email(x.getUserMission().getEmail(),"Nouveau compte HelpMe ", messagemail);
- 		sendEmail(e);
+ 		//sendEmail(e);
 		return	mr.save(x);
 	}
 }
