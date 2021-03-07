@@ -1,17 +1,16 @@
 package com.application.helpme.Model;
 
 public class Email {
-	private String username;
 	private String email;
 	private String subject;
 	private String message;
 	
-	public String getUsername() {
-		return username;
+	public Email(String e, String s, String m) {
+		this.email=e;
+		this.subject=s;
+		this.message=m;
 	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
+	
 	public String getEmail() {
 		return email;
 	}

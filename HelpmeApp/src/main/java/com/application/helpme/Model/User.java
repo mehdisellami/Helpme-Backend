@@ -49,15 +49,12 @@ public class User {
     @Size(min=3, max = 50)
     private String username;
   
-
 	@NaturalId
     @Email
     private String email;
-	
-	
+
     @NotBlank
     private String password;
-	
 	
     @NotBlank
     private String tel;
@@ -71,33 +68,23 @@ public class User {
     @Transient
     Position pos;
     
-    
     @Transient
     Pref prefUser;
-    
     
 	@ManyToOne (fetch = FetchType.LAZY)
 	@JoinColumn(name = "userMissionCreateur")
 	Mission userMissionCreateur;
-    
-
-	
-	
+ 
 	public User() {
 		super();
 	}
-	
-	
-	
-public User(int id, @NotBlank @Size(min = 3, max = 50) String name, Position pos) {
+		
+	public User(int id, @NotBlank @Size(min = 3, max = 50) String name, Position pos) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.pos = pos;
 	}
-
-
-
 
 	public User(@NotBlank @Size(min = 3, max = 50) String name, @NotBlank @Size(min = 3, max = 50) String username,
 			@Email String email, @NotBlank String password, @NotBlank String tel) {
@@ -109,99 +96,71 @@ public User(int id, @NotBlank @Size(min = 3, max = 50) String name, Position pos
 		this.tel = tel;
 	}
 	
-
 	public int getId() {
-	return id;
-}
+		return id;
+	}
 
-
-
-public User(@NotBlank @Size(min = 3, max = 50) String name, @NotBlank @Size(min = 3, max = 50) String username,
+	public User(@NotBlank @Size(min = 3, max = 50) String name, @NotBlank @Size(min = 3, max = 50) String username,
 		@Email String email, @NotBlank String password, @NotBlank String tel, Set<Role> roles, Position pos,
 		Pref prefUser) {
-	super();
-	this.name = name;
-	this.username = username;
-	this.email = email;
-	this.password = password;
-	this.tel = tel;
-	this.roles = roles;
-	this.pos = pos;
-	this.prefUser = prefUser;
-}
+		super();
+		this.name = name;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.tel = tel;
+		this.roles = roles;
+		this.pos = pos;
+		this.prefUser = prefUser;
+	}
 
+	public User(@NotBlank @Size(min = 3, max = 50) String name, @NotBlank @Size(min = 3, max = 50) String username,
+			@Email String email, @NotBlank String password, @NotBlank String tel, Set<Role> roles, Position pos,
+			Pref prefUser, Mission userMissionCreateur) {
+		super();
+		this.name = name;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.tel = tel;
+		this.roles = roles;
+		this.pos = pos;
+		this.prefUser = prefUser;
+		this.userMissionCreateur = userMissionCreateur;
+	}
 
+	public User(int id, @NotBlank @Size(min = 3, max = 50) String name, Position pos, Pref prefUser,
+			Mission userMissionCreateur) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.pos = pos;
+		this.prefUser = prefUser;
+		this.userMissionCreateur = userMissionCreateur;
+	}
 
+	public User(int id, @NotBlank @Size(min = 3, max = 50) String name, Position pos, Pref prefUser) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.pos = pos;
+		this.prefUser = prefUser;
+	}
 
+	public User(int id, @NotBlank @Size(min = 3, max = 50) String name, @NotBlank @Size(min = 3, max = 50) String username,
+			@Email String email, @NotBlank String password, @NotBlank String tel) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.tel = tel;
+	}
 
-
-
-
-
-
-
-
-public User(@NotBlank @Size(min = 3, max = 50) String name, @NotBlank @Size(min = 3, max = 50) String username,
-		@Email String email, @NotBlank String password, @NotBlank String tel, Set<Role> roles, Position pos,
-		Pref prefUser, Mission userMissionCreateur) {
-	super();
-	this.name = name;
-	this.username = username;
-	this.email = email;
-	this.password = password;
-	this.tel = tel;
-	this.roles = roles;
-	this.pos = pos;
-	this.prefUser = prefUser;
-	this.userMissionCreateur = userMissionCreateur;
-}
-
-
-
-
-public User(int id, @NotBlank @Size(min = 3, max = 50) String name, Position pos, Pref prefUser,
-		Mission userMissionCreateur) {
-	super();
-	this.id = id;
-	this.name = name;
-	this.pos = pos;
-	this.prefUser = prefUser;
-	this.userMissionCreateur = userMissionCreateur;
-}
-
-
-
-public User(int id, @NotBlank @Size(min = 3, max = 50) String name, Position pos, Pref prefUser) {
-	super();
-	this.id = id;
-	this.name = name;
-	this.pos = pos;
-	this.prefUser = prefUser;
-}
-
-
-
-
-
-
-public User(int id, @NotBlank @Size(min = 3, max = 50) String name, @NotBlank @Size(min = 3, max = 50) String username,
-		@Email String email, @NotBlank String password, @NotBlank String tel) {
-	super();
-	this.id = id;
-	this.name = name;
-	this.username = username;
-	this.email = email;
-	this.password = password;
-	this.tel = tel;
-}
-
-
-
-public void setId(int id) {
-	this.id = id;
-}
-
-
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
@@ -259,39 +218,19 @@ public void setId(int id) {
 		this.pos = pos;
 	}
 
-
-
 	public Pref getPrefUser() {
 		return prefUser;
 	}
-
-
 
 	public void setPrefUser(Pref prefUser) {
 		this.prefUser = prefUser;
 	}
 
-
-
 	public Mission getUserMissionCreateur() {
 		return userMissionCreateur;
 	}
 
-
-
 	public void setUserMissionCreateur(Mission userMissionCreateur) {
 		this.userMissionCreateur = userMissionCreateur;
 	}
-
-
-
-
-
-
-	
-	
-	
-	
-	
-	
 }

@@ -33,6 +33,7 @@ public class Mission extends GeoElement {
     //private Long idMission;
 	
 	private int idMission;
+	
 	@NotBlank
     private String nomMission;
 
@@ -43,7 +44,6 @@ public class Mission extends GeoElement {
 	
 	private String tel;
 	
-	
 	@NotBlank
     private String description;
 	
@@ -52,7 +52,6 @@ public class Mission extends GeoElement {
 	
 	@Enumerated(EnumType.ORDINAL)
 	private FeedbackMission feedbackNote = FeedbackMission.ETOILE0;
-	
 	
 	@ManyToOne (fetch = FetchType.LAZY)
 	@JoinColumn(name = "id")
@@ -67,49 +66,44 @@ public class Mission extends GeoElement {
 	@Transient
     Pref prefMission;
 	
-	
 	public Mission() {
-		
 	}
 	
-	
-	
+	public Mission(int idMission, @NotBlank String nomMission, @NotBlank String adressMission, Position pos) {
+			super();
+			this.idMission = idMission;
+			this.nomMission = nomMission;
+			this.adressMission = adressMission;
+			this.pos = pos;
+		}
 
-public Mission(int idMission, @NotBlank String nomMission, @NotBlank String adressMission, Position pos) {
+	public Mission(@NotBlank String nomMission, @NotBlank String adressMission, LocalDate dateMission, String tel,
+			@NotBlank String description, etatMission statusMission, FeedbackMission feedbackNote, User userMission,
+			String commentaire, Position pos) {
 		super();
-		this.idMission = idMission;
 		this.nomMission = nomMission;
 		this.adressMission = adressMission;
+		this.dateMission = dateMission;
+		this.tel = tel;
+		this.description = description;
+		this.statusMission = statusMission;
+		this.feedbackNote = feedbackNote;
+		this.userMission = userMission;
+		this.commentaire = commentaire;
 		this.pos = pos;
 	}
-
-
-
-
-public Mission(@NotBlank String nomMission, @NotBlank String adressMission, LocalDate dateMission, String tel,
-		@NotBlank String description, etatMission statusMission, FeedbackMission feedbackNote, User userMission,
-		String commentaire, Position pos) {
-	super();
-	this.nomMission = nomMission;
-	this.adressMission = adressMission;
-	this.dateMission = dateMission;
-	this.tel = tel;
-	this.description = description;
-	this.statusMission = statusMission;
-	this.feedbackNote = feedbackNote;
-	this.userMission = userMission;
-	this.commentaire = commentaire;
-	this.pos = pos;
 	
-}
-
-
-
-
-
-
-
-
+	public Mission(@NotBlank String nomMission, @NotBlank String adressMission, LocalDate dateMission,
+			@NotBlank String description, etatMission statusMission, FeedbackMission feedbackNote, User userMission) {
+		super();
+		this.nomMission = nomMission;
+		this.adressMission = adressMission;
+		this.dateMission = dateMission;
+		this.description = description;
+		this.statusMission = statusMission;
+		this.feedbackNote = feedbackNote;
+		this.userMission = userMission;
+	}
 
 //	public Mission(Long idMission, @NotBlank String nomMission, @NotBlank String adressMission, LocalDate dateMission,
 //			@NotBlank String description, User userMission) {
@@ -164,97 +158,73 @@ public Mission(@NotBlank String nomMission, @NotBlank String adressMission, Loca
 //		this.idMission = idMission;
 //	}
 
-
 	public int getIdMission() {
 		return idMission;
 	}
-
-
-
 
 	public void setIdMission(int idMission) {
 		this.idMission = idMission;
 	}
 
-
-
-
 	public String getNomMission() {
 		return nomMission;
 	}
-
 
 	public void setNomMission(String nomMission) {
 		this.nomMission = nomMission;
 	}
 
-
 	public String getAdressMission() {
 		return adressMission;
 	}
-
 
 	public void setAdressMission(String adressMission) {
 		this.adressMission = adressMission;
 	}
 
-
 	public String getDescription() {
 		return description;
 	}
-
 
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-
-	
-
 	public LocalDate getDateMission() {
 		return dateMission;
 	}
-
 
 	public void setDateMission(LocalDate dateMission) {
 		this.dateMission = dateMission;
 	}
 
-
 	public User getUserMission() {
 		return userMission;
 	}
-
 
 	public void setUserMission(User userMission) {
 		this.userMission = userMission;
 	}
 
-
 	public etatMission getStatusMission() {
 		return statusMission;
 	}
-
 
 	public void setStatusMission(etatMission statusMission) {
 		this.statusMission = statusMission;
 	}
 
-
 	public FeedbackMission getFeedbackNote() {
 		return feedbackNote;
 	}
-
 
 	public void setFeedbackNote(FeedbackMission feedbackNote) {
 		this.feedbackNote = feedbackNote;
 	}
 
-
 	public String getCommentaire() {
 		return commentaire;
 	}
-
 
 	public void setCommentaire(String commentaire) {
 		this.commentaire = commentaire;
@@ -276,37 +246,11 @@ public Mission(@NotBlank String nomMission, @NotBlank String adressMission, Loca
 		this.pos = pos;
 	}
 
-
-
-
 	public Pref getPrefMission() {
 		return prefMission;
 	}
 
-
-
-
 	public void setPrefMission(Pref prefMission) {
 		this.prefMission = prefMission;
 	}
-
-
-	
-
-
-
-
-
-	
-
-
-
-
-
-
-	
-	
-	
-	
-
 }
