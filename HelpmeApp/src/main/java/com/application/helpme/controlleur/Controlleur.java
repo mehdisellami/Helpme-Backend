@@ -220,16 +220,24 @@ public class Controlleur {
 	
 	@PutMapping("/Missiontermine/{idmission}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public synchronized  Mission  terminerMission( @PathVariable  int idmission) {
+	public synchronized  Mission  terminerMission(@PathVariable  int idmission) {
 		Mission x = mr.findById(idmission).get();
 		x.setStatusMission(etatMission.Termine);
 		return	mr.save(x);
 	} 
-
-	@PutMapping("/feedBackMission/{idmission}/{IdNoteMission}")
+	
+	@PutMapping("/annulerFinMission/{idmission}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public synchronized  Mission  feedBackMission( @PathVariable  int idmission , @PathVariable  int IdNoteMission ) throws Exception {
+	public synchronized  Mission  annulerFinMission(@PathVariable  int idmission) {
 		Mission x = mr.findById(idmission).get();
+		x.setStatusMission(etatMission.ACCEPTE);
+		return	mr.save(x);
+	}
+
+	@PutMapping("/feedBackMission/{IdNoteMission}")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public synchronized  Mission  feedBackMission(@PathVariable  int IdNoteMission, @Valid  @RequestBody Mission m) throws Exception {
+		Mission x = mr.findById(m.getIdMission()).get();
 		if (IdNoteMission == 1 && x.getStatusMission().equals(etatMission.Termine)) {
 			x.setFeedbackNote(FeedbackMission.ETOILE1);
 		}
@@ -249,24 +257,14 @@ public class Controlleur {
 			throw new Exception  ("Désolé, la mission n'est pas termineé") ;
 		}
 		
-		String messagemail = "Vous a attribué une note de " + IdNoteMission + " sur 5 pour la mission" + x.getNomMission() ;
- 		Email e = new Email("sidatealexis@gmail.com","Feedback mission" + x.getNomMission(), messagemail);
- 		//Email e = new Email(x.getUserMission().getEmail(),"Nouveau compte HelpMe ", messagemail);
+		x.setCommentaire(m.getCommentaire());
+		
+		String messagemail = "Vous a attribué une note de " + IdNoteMission + " sur 5 pour la mission " + x.getNomMission() + " et a laissé le commentaire suivant :" + nl + x.getCommentaire();
+ 		Email e = new Email("sidatealexis@gmail.com","Feedback mission " + x.getNomMission(), messagemail);
+ 		//Email e = new Email(x.getUserMission().getEmail(),"Feedback mission" + x.getNomMission(), messagemail);
  		//sendEmail(e);
  		
 		return	mr.save(x);
 	} 
 
-	@PutMapping("/mettreunCommentaire/{idmission}")
-	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public synchronized  Mission  modifierCommentaire( @PathVariable  int idmission , @RequestBody Mission m) {
-		Mission x = mr.findById(idmission).get();
-		x.setCommentaire(m.getCommentaire());
-		
-		String messagemail = "Vous avez recu un nouveau commentaire pour la mission " + x.getNomMission() + " : " + nl + nl + x.getCommentaire();
- 		Email e = new Email("sidatealexis@gmail.com","Feedback mission" + x.getNomMission(), messagemail);
- 		//Email e = new Email(x.getUserMission().getEmail(),"Nouveau compte HelpMe ", messagemail);
- 		//sendEmail(e);
-		return	mr.save(x);
-	}
 }

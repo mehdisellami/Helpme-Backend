@@ -56,7 +56,7 @@ public class Mission extends GeoElement {
 	@ManyToOne (fetch = FetchType.LAZY)
 	@JoinColumn(name = "id")
 
-	User userMission ;
+	User userMission;
 	
 	private String commentaire;
 
