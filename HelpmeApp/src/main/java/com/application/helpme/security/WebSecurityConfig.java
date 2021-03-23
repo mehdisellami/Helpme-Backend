@@ -60,6 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 authorizeRequests()
                 .antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/upload/**").permitAll()
+                .antMatchers("/listeMission/**").permitAll()
                 .antMatchers("/uploadprojet/**").permitAll()
                 .antMatchers("/deletemission/**").permitAll()
 
