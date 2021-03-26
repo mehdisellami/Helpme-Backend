@@ -2,15 +2,24 @@ package com.application.helpme.Model;
 
 import java.util.prefs.PreferenceChangeEvent;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Pref {
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	
 	private boolean vieux;
 	
 	private boolean jeune;
 
 	public Pref() {
-		this.vieux=true;
-		this.jeune=false;
+		
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -31,6 +40,17 @@ public class Pref {
 
 
 
+	
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 
 	public boolean isVieux() {
 		return vieux;
@@ -49,11 +69,27 @@ public class Pref {
 	}
 	
 	
-	public boolean accepte(Pref o) {
+	public boolean accepte(User userpref ,Mission mpref ) {
+		boolean rtr=false;
 		
 		
+		if (userpref.getPrefUser().isJeune() &&  mpref.getPrefMission().isJeune() ) {
+			
+			rtr=true;
+		}
+		
+		
+		else if (userpref.getPrefUser().isVieux() &&  mpref.getPrefMission().isVieux() ) {	
+			rtr = true;
+			System.out.println("L'utilisi est compatible avec la mission && VIEUX");
+		}
+		
+		else {System.out.println("L'utilisi n'est pas compatible avec la mission");
+			rtr=false;
+		}
 	
-		return true; 
+	
+		return rtr; 
 	}
 	
 	

@@ -14,7 +14,7 @@ import com.application.helpme.Model.User;
 
 
 
-public interface missionRepository extends CrudRepository<Mission, Integer> {
+public interface missionRepository extends JpaRepository<Mission, Integer> {
 	
 	
 	@Query("from Mission m WHERE m.userMission.username=:username AND m.statusMission=2  ")

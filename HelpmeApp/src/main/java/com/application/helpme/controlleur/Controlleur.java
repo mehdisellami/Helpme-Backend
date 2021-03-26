@@ -1,10 +1,11 @@
 package com.application.helpme.controlleur;
 
-
+import java.io.IOException;
 import java.time.LocalDate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -31,9 +32,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.application.helpme.DAO.missionRepository;
 import com.application.helpme.DAO.userRepository;
+import com.application.helpme.Model.Agence;
 import com.application.helpme.Model.Email;
 import com.application.helpme.Model.FeedbackMission;
 import com.application.helpme.Model.Mission;
+import com.application.helpme.Model.Position;
+import com.application.helpme.Model.Pref;
 import com.application.helpme.Model.User;
 import com.application.helpme.Model.etatMission;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -49,247 +53,276 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 
 public class Controlleur {
-	
+
 	@Autowired
 	missionRepository mr;
-	
+
 	@Autowired
 	userRepository ur;
-	
+
 	String nl = System.getProperty("line.separator");
-	
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(Controller.class);
-	
+
 	@Autowired
 	private JavaMailSender javaMailSender;
-	
+
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	@RequestMapping(value = "/email", method = RequestMethod.POST, consumes = "application/json")
 	public void sendEmail(@RequestBody Email emailModel) {
 		LOGGER.info("Sending email");
-		
+
 		MimeMessage mail = javaMailSender.createMimeMessage();
 		try {
-		MimeMessageHelper helper = new MimeMessageHelper(mail, true);
-		helper.setTo("sidatealexis@gmail.com");
-		//helper.setFrom(emailModel.getEmail());
-		helper.setSubject(emailModel.getSubject());
-		helper.setText(emailModel.getMessage());
+			MimeMessageHelper helper = new MimeMessageHelper(mail, true);
+			helper.setTo("sidatealexis@gmail.com");
+			// helper.setFrom(emailModel.getEmail());
+			helper.setSubject(emailModel.getSubject());
+			helper.setText(emailModel.getMessage());
 		} catch (MessagingException e) {
-		LOGGER.error("Failed to send email: " + emailModel.toString(), e);
-		} finally {}
+			LOGGER.error("Failed to send email: " + emailModel.toString(), e);
+		} finally {
+		}
 		javaMailSender.send(mail);
 	}
-	
+
 	@GetMapping("/test")
 	@PreAuthorize("hasRole('ADMIN')")
 	public String RestApi() {
 		return "HelpME Application Université Paris Nanterre";
 	}
 
-	
 	@PostMapping("/newmission")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
-	public Mission addNewMission(@Valid  @RequestBody Mission m) {
-		
-		Mission dem = new Mission(m.getNomMission(),m.getAdressMission(),m.getDateMission(),m.getDescription(),m.getStatusMission(),m.getFeedbackNote(),m.getUserMission());
-		
-		String messagemail = "Votre mission a bien été créée, voici les informations de celle-ci" + nl + nl + "Nom de la mission :" + m.getNomMission() + nl + "Adresse de la mission : "+
-				m.getAdressMission() + nl +"Date de la mission : " + m.getDateMission() + nl + "Description : " + m.getDescription() + ".";
-		Email e = new Email("sidatealexis@gmail.com","Création de la mission " + m.getNomMission() , messagemail);
-		//Email e = new Email(m.getUserMission().getEmail(),"Création de mission", messagemail);
-		//sendEmail(e);
-		
-        return 	mr.save(dem);
+	public Mission addNewMission(@Valid @RequestBody Mission m) {
+
+		Mission dem = new Mission(m.getNomMission(), m.getAdressMission(), m.getDateMission(), m.getDescription(),
+				m.getStatusMission(), m.getFeedbackNote(), m.getUserMission());
+
+		String messagemail = "Votre mission a bien été créée, voici les informations de celle-ci" + nl + nl
+				+ "Nom de la mission :" + m.getNomMission() + nl + "Adresse de la mission : " + m.getAdressMission()
+				+ nl + "Date de la mission : " + m.getDateMission() + nl + "Description : " + m.getDescription() + ".";
+		Email e = new Email("sidatealexis@gmail.com", "Création de la mission " + m.getNomMission(), messagemail);
+		// Email e = new Email(m.getUserMission().getEmail(),"Création de mission",
+		// messagemail);
+		// sendEmail(e);
+
+		return mr.save(dem);
 	}
-	
+
 	@GetMapping("/getmission/{idMission}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public synchronized Mission GetMission(@PathVariable int idMission) {
 		Mission x = mr.findById(idMission).get();
 		return x;
 	}
-	
+
 	@PostMapping("/editmission")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public synchronized Mission editMission(@Valid  @RequestBody Mission m) {
+	public synchronized Mission editMission(@Valid @RequestBody Mission m) {
 		Mission x = mr.findById(m.getIdMission()).get();
 		x.setNomMission(m.getNomMission());
 		x.setDateMission(m.getDateMission());
 		x.setAdressMission(m.getAdressMission());
 		x.setDescription(m.getDescription());
-		
-		String messagemail = "Votre mission a bien été modifiée, voici les nouvelles informations de celle-ci" + nl + nl + "Nom de la mission :" + m.getNomMission() + nl + "Adresse de la mission : "+
-				m.getAdressMission() + nl +"Date de la mission : " + m.getDateMission() + nl + "Description : " + m.getDescription() + ".";
-		Email e = new Email("sidatealexis@gmail.com","Modification de la mission " + m.getNomMission() , messagemail);
-		//Email e = new Email(m.getUserMission().getEmail(),"Modification de la mission" + m.getNomMission() , messagemail);
-		//sendEmail(e);
-		
+
+		String messagemail = "Votre mission a bien été modifiée, voici les nouvelles informations de celle-ci" + nl + nl
+				+ "Nom de la mission :" + m.getNomMission() + nl + "Adresse de la mission : " + m.getAdressMission()
+				+ nl + "Date de la mission : " + m.getDateMission() + nl + "Description : " + m.getDescription() + ".";
+		Email e = new Email("sidatealexis@gmail.com", "Modification de la mission " + m.getNomMission(), messagemail);
+		// Email e = new Email(m.getUserMission().getEmail(),"Modification de la
+		// mission" + m.getNomMission() , messagemail);
+		// sendEmail(e);
+
 		return mr.save(x);
 	}
-	
+
 	@DeleteMapping("/deletemission/{idMission}")
-    public Boolean deleteMission(@PathVariable int idMission) {
+	public Boolean deleteMission(@PathVariable int idMission) {
 		Mission x = mr.findById(idMission).get();
 
-        String messagemail = "Votre mission " + x.getNomMission() + " a bien été supprimée";
- 		Email e = new Email("sidatealexis@gmail.com","Suppression de la mission " + x.getNomMission() , messagemail);
- 		//Email e = new Email(x.getUserMission().getEmail(),"Création de mission", messagemail);
- 		//sendEmail(e);
- 		
- 		mr.deleteById(idMission);
-         return true ;
-    }
-	
+		String messagemail = "Votre mission " + x.getNomMission() + " a bien été supprimée";
+		Email e = new Email("sidatealexis@gmail.com", "Suppression de la mission " + x.getNomMission(), messagemail);
+		// Email e = new Email(x.getUserMission().getEmail(),"Création de mission",
+		// messagemail);
+		// sendEmail(e);
+
+		mr.deleteById(idMission);
+		return true;
+	}
+
 	@PostMapping("/newuser")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
-	public User addNewUser(@Valid  @RequestBody User u  ) {
-		User usr = new User(u.getName(),u.getUsername(),u.getEmail(),u.getPassword(),u.getTel());
-		
-		String messagemail = "Votre compte HelpMe a bien été créé"+ nl + "Identifiant :" + u.getUsername() ;
- 		Email e = new Email("sidatealexis@gmail.com","Nouveau compte HelpMe ", messagemail);
- 		//Email e = new Email(u.getEmail(),"Nouveau compte HelpMe ", messagemail);
- 		//sendEmail(e);
-		return 	ur.save(usr);
+	public User addNewUser(@Valid @RequestBody User u) {
+		User usr = new User(u.getName(), u.getUsername(), u.getEmail(), u.getPassword(), u.getTel());
+
+		String messagemail = "Votre compte HelpMe a bien été créé" + nl + "Identifiant :" + u.getUsername();
+		Email e = new Email("sidatealexis@gmail.com", "Nouveau compte HelpMe ", messagemail);
+		// Email e = new Email(u.getEmail(),"Nouveau compte HelpMe ", messagemail);
+		// sendEmail(e);
+		return ur.save(usr);
 	}
-	
+
 	@GetMapping("/listeMission")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public Iterable<Mission> findProjet() {
-		return  mr.findAll();	
+		return mr.findAll();
 	}
-	
+
 	@GetMapping("/listeMissionEnAttente")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public Iterable<Mission> findMissionAttente() {
-		return  mr.findMissionenAttente();
+		return mr.findMissionenAttente();
 	}
-	
+
 	@GetMapping("/listeUser")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public Iterable<User> findUser() {
-		return  ur.findAll();
+		return ur.findAll();
 	}
 
 	@GetMapping("/Login/{username}/{password}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public String loginUser(@PathVariable String username, @PathVariable String password) {
-		 ur.finduserByuserNameandPassword(username , password);
-		 return String.format("L'utilisateur %s est Connecté", username);		
+		ur.finduserByuserNameandPassword(username, password);
+		return String.format("L'utilisateur %s est Connecté", username);
 	}
-	
+
 	@GetMapping("/findidUserbyUsername/{username}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public int findIDuserByusername(@PathVariable String username) {
-		return ur.findIDuserByusername(username );
+		return ur.findIDuserByusername(username);
 	}
-	
+
 	@GetMapping("/findUserbyUsername/{username}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public List<User> finduserByusername(@PathVariable String username) {
 		return ur.findUserByUsername(username);
 	}
-	
+
 	@GetMapping("/findUserMissionHistory/{username}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public List<Mission> findUserMissionHistory(@PathVariable String username) {
 		return mr.findUserMissionHistory(username);
 	}
-	
+
 	@PutMapping("/affecterUserMission/{iduser}/{idmission}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public synchronized  Mission  affecterUserMission(@PathVariable int iduser  , @PathVariable  int idmission) {
+	public synchronized Mission affecterUserMission(@PathVariable int iduser, @PathVariable int idmission) {
 		Mission x = mr.findById(idmission).get();
 		x.setUserMission(ur.findById(iduser).get());
 		x.setStatusMission(etatMission.ACCEPTE);
-		
+
 		String messagemail = "Votre mission " + x.getNomMission() + " a été prise en charge par ";
- 		Email e = new Email("sidatealexis@gmail.com","Votre mission " + x.getNomMission() + " a été acceptée", messagemail);
- 		//Email e = new Email(x.getUserMission().getEmail(),"Nouveau compte HelpMe ", messagemail);
- 		//sendEmail(e);
- 		
-		return	mr.save(x);	
+		Email e = new Email("sidatealexis@gmail.com", "Votre mission " + x.getNomMission() + " a été acceptée",
+				messagemail);
+		// Email e = new Email(x.getUserMission().getEmail(),"Nouveau compte HelpMe ",
+		// messagemail);
+		// sendEmail(e);
+
+		return mr.save(x);
 	}
-	
+
 	@PutMapping("/Missiontermine/{idmission}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public synchronized  Mission  terminerMission(@PathVariable  int idmission) {
+	public synchronized Mission terminerMission(@PathVariable int idmission) {
 		Mission x = mr.findById(idmission).get();
 		x.setStatusMission(etatMission.Termine);
-		return	mr.save(x);
-	} 
-	
+		return mr.save(x);
+	}
+
 	@PutMapping("/annulerFinMission/{idmission}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public synchronized  Mission  annulerFinMission(@PathVariable  int idmission) {
+	public synchronized Mission annulerFinMission(@PathVariable int idmission) {
 		Mission x = mr.findById(idmission).get();
 		x.setStatusMission(etatMission.ACCEPTE);
-		return	mr.save(x);
+		return mr.save(x);
 	}
 
 	@PutMapping("/feedBackMission/{IdNoteMission}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public synchronized  Mission  feedBackMission(@PathVariable  int IdNoteMission, @Valid  @RequestBody Mission m) throws Exception {
+	public synchronized Mission feedBackMission(@PathVariable int IdNoteMission, @Valid @RequestBody Mission m)
+			throws Exception {
 		Mission x = mr.findById(m.getIdMission()).get();
 		if (IdNoteMission == 1 && x.getStatusMission().equals(etatMission.Termine)) {
 			x.setFeedbackNote(FeedbackMission.ETOILE1);
-		}
-		else if (IdNoteMission == 2 && x.getStatusMission().equals(etatMission.Termine)) {
+		} else if (IdNoteMission == 2 && x.getStatusMission().equals(etatMission.Termine)) {
 			x.setFeedbackNote(FeedbackMission.ETOILE2);
-		}
-		else if (IdNoteMission == 3  && x.getStatusMission().equals(etatMission.Termine)) {
+		} else if (IdNoteMission == 3 && x.getStatusMission().equals(etatMission.Termine)) {
 			x.setFeedbackNote(FeedbackMission.ETOILE3);
-		}
-		else if (IdNoteMission == 4 && x.getStatusMission().equals(etatMission.Termine)) {
+		} else if (IdNoteMission == 4 && x.getStatusMission().equals(etatMission.Termine)) {
 			x.setFeedbackNote(FeedbackMission.ETOILE4);
-		}
-		else if (IdNoteMission == 5 && x.getStatusMission().equals(etatMission.Termine)) {
+		} else if (IdNoteMission == 5 && x.getStatusMission().equals(etatMission.Termine)) {
 			x.setFeedbackNote(FeedbackMission.ETOILE5);
+		} else {
+			throw new Exception("Désolé, la mission n'est pas termineé");
 		}
-		else {
-			throw new Exception  ("Désolé, la mission n'est pas termineé") ;
-		}
-		
+
 		x.setCommentaire(m.getCommentaire());
-		
-		String messagemail = "Vous a attribué une note de " + IdNoteMission + " sur 5 pour la mission " + x.getNomMission() + " et a laissé le commentaire suivant :" + nl + x.getCommentaire();
- 		Email e = new Email("sidatealexis@gmail.com","Feedback mission " + x.getNomMission(), messagemail);
- 		//Email e = new Email(x.getUserMission().getEmail(),"Feedback mission" + x.getNomMission(), messagemail);
- 		//sendEmail(e);
- 		
-		return	mr.save(x);
-	} 
-	
-	@GetMapping("/estCompatible/{idUserPref}/{idMissionPref}")
+
+		String messagemail = "Vous a attribué une note de " + IdNoteMission + " sur 5 pour la mission "
+				+ x.getNomMission() + " et a laissé le commentaire suivant :" + nl + x.getCommentaire();
+		Email e = new Email("sidatealexis@gmail.com", "Feedback mission " + x.getNomMission(), messagemail);
+		// Email e = new Email(x.getUserMission().getEmail(),"Feedback mission" +
+		// x.getNomMission(), messagemail);
+		// sendEmail(e);
+
+		return mr.save(x);
+	}
+
+	@GetMapping("/distance/{iduser}/{idmission}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public boolean estCompatible(@PathVariable  int idUserPref, @PathVariable  int idMissionPref,@RequestBody User userpref, @RequestBody Mission mpref) {
+	public double calculDistance(@PathVariable int iduser, @PathVariable int idmission, @RequestBody Position posuser,
+			@RequestBody Position posMission) {
+		double x = 0;
+		User user = ur.findById(iduser).get();
+		Mission mission = mr.findById(idmission).get();
+
+		posuser = new Position(2.390055, 48.8077584);
+
+		posMission = new Position(2.3500595, 48.862501);
+
+		user.setPos(posuser);
+		mission.setPos(posMission);
+
+//		 
+//		 user.setPos(posUser);
+//		 mission.setPos(posMission);
+
+		Position p = new Position();
+
+		return p.distance(user.getPos(), mission.getPos());
+
+	}
+
+	@GetMapping("/findMission/{iduser}/{idmission}")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public List<Mission> findMissionCompatible(Agence agence, @PathVariable int iduser, @PathVariable int idmission) {
+
+		agence.setListeMission(mr.findAll());
 		
-		 ur.findById(userpref.getId()).get();
-		 mr.findById(mpref.getIdMission()).get();
+		User user = ur.findById(iduser).get();
+		Mission mission = mr.findById(idmission).get();
+
+		//agence.estCompatible(user, mission);
+
+		Position posUser = new Position(2.390055, 48.8077584);
+
+		Position posMission = new Position(2.3500595, 48.862501);
+
 		
-		boolean rtr=false;
+
+		Position posArrivee = new Position(2.200134, 48.92714);
+
 		
-		if (userpref.getPrefUser().isJeune() &&  mpref.getPrefMission().isJeune() ) {
-			userpref.getPrefUser().accepte(mpref.getPrefMission());
-			rtr = true;			
-			
-			System.out.println("L'utilisi est compatible avec la mission");
-		}
-		else if (userpref.getPrefUser().isVieux() &&  mpref.getPrefMission().isVieux() ) {	
-			rtr = true;
-			System.out.println("L'utilisi est compatible avec la mission && VIEUX");
-		}
-		
-		else {System.out.println("L'utilisi n'est pas compatible avec la mission");}
-		return rtr;
-		
+		return agence.selectionner(posUser, posArrivee);
+
 	}
 
 }

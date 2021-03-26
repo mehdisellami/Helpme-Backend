@@ -55,7 +55,6 @@ public class Mission extends GeoElement {
 	
 	@ManyToOne (fetch = FetchType.LAZY)
 	@JoinColumn(name = "id")
-
 	User userMission;
 	
 	private String commentaire;
@@ -63,7 +62,7 @@ public class Mission extends GeoElement {
 	@Transient
 	Position pos;
 	
-	@Transient
+	@ManyToOne (fetch = FetchType.LAZY)
     Pref prefMission;
 	
 	public Mission() {

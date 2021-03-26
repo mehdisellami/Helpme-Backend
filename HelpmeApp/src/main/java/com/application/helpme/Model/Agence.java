@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.springframework.web.bind.annotation.PathVariable;
+
 public class Agence {
 	
 	List <Mission> listeMission= new ArrayList<>();
@@ -41,80 +43,68 @@ public class Agence {
 
 	
 	
-//	public Map<Mission,Double> selectionner(Position depart ,Position arrivee){
-//        Map <Mission,Double> resultat = new HashMap<Mission, Double>();
-//        for (Mission m : listeMission) {
-//            double d1 = distance(depart,m.getPos());
-//            double d2 = distance(m.getPos(),arrivee);
-//            double result=d1+d2;
-//            System.out.println("La mission " + m.getNomMission() + " se trouve a " + d1 + " km de ma position et a " + result + " km de mon point d'arrivee");
-//            
-//            if(result <12) {
-//            	System.out.println("Le nom de la mission pris " + m.getNomMission());
-//            	   resultat.put(m, result);
-//            	   
-//          
-//            	  
-//            	
-//            }
-//            else {System.out.println("la les Mission est trop loin ");}
-//            
-//         
-//        }
+	public List<Mission> selectionner(Position depart ,Position arrivee){
+        List<Mission> resultat = new ArrayList<Mission>();
+        for (Mission m : listeMission) {
+        	
+            double d1 = distance(depart,m.getPos());
+            double d2 = distance(m.getPos(),arrivee);
+            double result=d1+d2;
+            System.out.println("La mission " + m.getNomMission() + " se trouve a " + d1 + " km de ma position et a " + result + " km de mon point d'arrivee");
+            
+            resultat.add(m);
+            
+         
+        }
       //  resultat.forEach((k,v) -> System.out.println(k.getNomMission()+"  "+v));
-//        return resultat;
-//    }
+        return resultat;
+    }
 	
 
-//	public double distance(Position pos1, Position pos2) {
-//		
-//		double long1 =pos1.getLong();
-//		
-//		double lat1= pos1.getLat();
-//		
-//		double long2 =pos2.getLong() ; 
-//		double lat2=pos2.getLat();
-//		
-//		double p = 0.017453292519943295;    // Math.PI / 180
-//	    
-//	    double a = 0.5- Math.cos((lat2 - lat1) * p)/2 + Math.cos(lat1 * p) * Math.cos(lat2 * p) * (1 - Math.cos((long2 - long1) * p))/2;
-//	    		
-//	    double result = Math.round( 12742 * Math.asin(Math.sqrt(a)));
-//	    return result;  // 2 * R; R = 6371 km
-//		 
-//	}
+
 	
-	public double distance (UserLocalise ul , Mission m ) {
-		System.out.println("Methode distance classe Agence lancé");
-		return ul.distance(m);
+	public double distance (Position pos1 , Position pos2 ) {
+		double long1 = pos1.getLong();
+		
+		
+		double lat1= pos1.getLat();
+		
+		double long2 =pos2.getLong();
+		double lat2=pos2.getLat();
+	
+		
+		double p = 0.017453292519943295;    // Math.PI / 180
+	    
+	    double a = 0.5- Math.cos((lat2 - lat1) * p)/2 + Math.cos(lat1 * p) * Math.cos(lat2 * p) * (1 - Math.cos((long2 - long1) * p))/2;
+	    		
+	    double result = Math.round( 12742 * Math.asin(Math.sqrt(a)));
+	    
+	    System.out.println("Methode distance classe Position lancé");
+	    return result;  // 2 * R; R = 6371 km	
 	}
 	
 	
 	public List<Mission> ListeMission(UserLocalise ul , double b){
 		
-		
-		return listeMission.stream().filter(m -> distance(ul, m) <= b).collect(Collectors.toList());
+		return null;
+		//return listeMission.stream().filter(m -> distance(ul, m) <= b).collect(Collectors.toList());
 		
 		
 	}
 	
-	public boolean estCompatible(UserLocalise userpref , Mission mpref) {
-		
+	public boolean estCompatible( User userpref,  Mission mpref) {
 		boolean rtr=false;
 		
-		if (userpref.getUserPos().getPrefUser().isJeune() &&  mpref.getPrefMission().isJeune() ) {
-			userpref.getUserPos().getPrefUser().accepte(mpref.getPrefMission());
-			rtr = true;			
-			
-			System.out.println("L'utilisi est compatible avec la mission");
-		}
-		else if (userpref.getUserPos().getPrefUser().isVieux() &&  mpref.getPrefMission().isVieux() ) {	
-			rtr = true;
-			System.out.println("L'utilisi est compatible avec la mission && VIEUX");
+		 
+		 Pref p = new Pref();
+		
+		if (p.accepte(userpref, mpref)) {
+			rtr=true;
 		}
 		
-		else {System.out.println("L'utilisi n'est pas compatible avec la mission");}
+		else { rtr=false;}
 		return rtr;
+		
 	}
 	
 	public <T> List<Mission> findMission(UserLocalise ul , Contrainte  c , double v){

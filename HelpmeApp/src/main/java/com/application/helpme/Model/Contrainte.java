@@ -8,12 +8,12 @@ public class  Contrainte   implements IContrainte {
 	public boolean test (UserLocalise ul, Mission m,  double b) {
 		boolean rtr=false;
 		
-		if(this.agence.distance(ul, m) <=b  ) {
-			
-			rtr=true;
-		}
-		else rtr= false;
-		
+//		if(this.agence.distance(ul, m) <=b  ) {
+//			
+//			rtr=true;
+//		}
+//		else rtr= false;
+//		
 		return rtr;
 	}
 	

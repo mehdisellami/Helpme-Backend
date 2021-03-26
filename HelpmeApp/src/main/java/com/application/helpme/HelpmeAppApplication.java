@@ -133,7 +133,7 @@ public class HelpmeAppApplication extends SpringBootServletInitializer {
 
 	
 		
-		agenceChercher.estCompatible(u1Localise, m3);
+	//	agenceChercher.estCompatible(u1Localise, m3);
 		
 		GeoElement g1 = new GeoElement();
 		g1.setMissionLocalise(m3);

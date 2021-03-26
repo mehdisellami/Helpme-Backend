@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.application.helpme.Model.User;
 
 @Repository
-public interface userRepository extends CrudRepository<User,Integer> {
+public interface userRepository extends JpaRepository<User,Integer> {
 	
 	
 	Optional<User> findByUsername(String username);

@@ -68,7 +68,7 @@ public class User {
     @Transient
     Position pos;
     
-    @Transient
+    @ManyToOne (fetch = FetchType.LAZY)
     Pref prefUser;
     
     int age ; 
