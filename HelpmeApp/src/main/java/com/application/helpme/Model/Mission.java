@@ -1,5 +1,6 @@
 package com.application.helpme.Model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -25,8 +26,9 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
+
 @Table
-public class Mission extends GeoElement {
+public class Mission extends GeoElement implements Serializable {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

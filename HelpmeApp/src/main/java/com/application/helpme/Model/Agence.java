@@ -46,6 +46,8 @@ public class Agence {
 	public List<Mission> selectionner(Position depart ,Position arrivee){
         List<Mission> resultat = new ArrayList<Mission>();
         for (Mission m : listeMission) {
+        	Position posMission = new Position(2.3500595, 48.862501);
+        	m.setPos(posMission);
         	
             double d1 = distance(depart,m.getPos());
             double d2 = distance(m.getPos(),arrivee);
@@ -79,7 +81,7 @@ public class Agence {
 	    		
 	    double result = Math.round( 12742 * Math.asin(Math.sqrt(a)));
 	    
-	    System.out.println("Methode distance classe Position lancé");
+	    System.out.println("Methode distance classe Agence lancé");
 	    return result;  // 2 * R; R = 6371 km	
 	}
 	
@@ -92,18 +94,34 @@ public class Agence {
 		
 	}
 	
-	public boolean estCompatible( User userpref,  Mission mpref) {
+	public List<Mission> estCompatible( User userpref,  List<Mission>mpref ,Position depart , Position arrivee) {
 		boolean rtr=false;
 		
-		 
-		 Pref p = new Pref();
+		List<Mission> resultat = new ArrayList<Mission>();
 		
-		if (p.accepte(userpref, mpref)) {
-			rtr=true;
+		for (Mission m : mpref) {
+			 Pref p = new Pref();
+			if (p.accepte(userpref, m) && m.getStatusMission().equals(etatMission.ENATTENTE)) {
+				
+				Position posMission = new Position(2.3500595, 48.862501);
+	        	m.setPos(posMission);
+	        	
+	            double d1 = distance(depart,m.getPos());
+	            double d2 = distance(m.getPos(),arrivee);
+	            double result=d1+d2;
+	            System.out.println("La mission " + m.getNomMission() + " se trouve a " + d1 + " km de ma position et a " + result + " km de mon point d'arrivee");
+	            
+	            resultat.add(m);
+				
+				
+				
+			}
+			
+			
+			
 		}
 		
-		else { rtr=false;}
-		return rtr;
+		return resultat;
 		
 	}
 	

@@ -6,8 +6,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
+@Table
 public class Pref {
 	
 	@Id
@@ -74,8 +80,10 @@ public class Pref {
 		
 		
 		if (userpref.getPrefUser().isJeune() &&  mpref.getPrefMission().isJeune() ) {
-			
+			System.out.println("L'utilisi est compatible avec la mission "+mpref.getNomMission()+" && Jeune");
+
 			rtr=true;
+		
 		}
 		
 		

@@ -301,27 +301,21 @@ public class Controlleur {
 
 	}
 
-	@GetMapping("/findMission/{iduser}/{idmission}")
+	@GetMapping("/findMission/{iduser}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public List<Mission> findMissionCompatible(Agence agence, @PathVariable int iduser, @PathVariable int idmission) {
+	public List<Mission> findMissionCompatible(@PathVariable int iduser, Agence agence) throws Exception {
+
+		List<Mission> missionList = new ArrayList<Mission>();
 
 		agence.setListeMission(mr.findAll());
-		
-		User user = ur.findById(iduser).get();
-		Mission mission = mr.findById(idmission).get();
 
-		//agence.estCompatible(user, mission);
+		User user = ur.findById(iduser).get();
 
 		Position posUser = new Position(2.390055, 48.8077584);
 
-		Position posMission = new Position(2.3500595, 48.862501);
-
-		
-
 		Position posArrivee = new Position(2.200134, 48.92714);
 
-		
-		return agence.selectionner(posUser, posArrivee);
+		return agence.estCompatible(user, agence.getListeMission(), posUser, posArrivee);
 
 	}
 
