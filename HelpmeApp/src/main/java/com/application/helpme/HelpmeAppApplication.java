@@ -82,7 +82,7 @@ public class HelpmeAppApplication extends SpringBootServletInitializer {
 		m3.setAdressMission("Université Paris Nanterre");
 		m3.setPos(p3);
 		m3.setPrefMission(prefJeune2);
-		
+		m3.setTrancheAge("vieux");
 		
 		
 		

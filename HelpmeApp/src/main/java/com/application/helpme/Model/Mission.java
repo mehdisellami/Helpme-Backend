@@ -43,6 +43,9 @@ public class Mission extends GeoElement {
 	
 	private String tel;
 	
+	@NotBlank
+	private String trancheAge;
+	
 	
 	@NotBlank
     private String description;
@@ -64,8 +67,10 @@ public class Mission extends GeoElement {
 	@Transient
 	Position pos;
 	
-	@Transient
+	@ManyToOne(fetch = FetchType.LAZY)
+    @ Entity
     Pref prefMission;
+	
 	
 	
 	public Mission() {
@@ -88,7 +93,7 @@ public Mission(int idMission, @NotBlank String nomMission, @NotBlank String adre
 
 public Mission(@NotBlank String nomMission, @NotBlank String adressMission, LocalDate dateMission, String tel,
 		@NotBlank String description, etatMission statusMission, FeedbackMission feedbackNote, User userMission,
-		String commentaire, Position pos) {
+		String commentaire, Position pos, @NotBlank String trancheAge) {
 	super();
 	this.nomMission = nomMission;
 	this.adressMission = adressMission;
@@ -100,7 +105,7 @@ public Mission(@NotBlank String nomMission, @NotBlank String adressMission, Loca
 	this.userMission = userMission;
 	this.commentaire = commentaire;
 	this.pos = pos;
-	
+	this.trancheAge = trancheAge;
 }
 
 
@@ -170,6 +175,7 @@ public Mission(@NotBlank String nomMission, @NotBlank String adressMission, Loca
 	}
 
 
+	
 
 
 	public void setIdMission(int idMission) {
@@ -292,7 +298,15 @@ public Mission(@NotBlank String nomMission, @NotBlank String adressMission, Loca
 
 
 	
-
+	public String getTrancheAge()
+	{
+		return trancheAge;
+	}
+	
+	public void setTrancheAge(String tran)
+	{
+		this.trancheAge = tran;
+	}
 
 
 

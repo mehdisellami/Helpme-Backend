@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: baadj
+Build-Jdk: 15
+Implementation-Title: HelpmeApp
+Implementation-Version: 0.0.1
+Implementation-Vendor-Id: com.application.helpme
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/HelpmeAppApplication
+Created-By: Maven Integration for Eclipse
+
