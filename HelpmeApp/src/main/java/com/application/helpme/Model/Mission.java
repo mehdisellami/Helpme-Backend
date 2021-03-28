@@ -67,6 +67,10 @@ public class Mission extends GeoElement implements Serializable {
 	@ManyToOne (fetch = FetchType.LAZY)
     Pref prefMission;
 	
+	   private double distanceUserMission;
+	   private double MissionPointArrivee;
+	   
+	
 	public Mission() {
 	}
 	
@@ -254,4 +258,27 @@ public class Mission extends GeoElement implements Serializable {
 	public void setPrefMission(Pref prefMission) {
 		this.prefMission = prefMission;
 	}
+	
+	public Mission get() {
+		return this;
+	}
+
+	public double getDistanceUserMission() {
+		return distanceUserMission;
+	}
+
+	public void setDistanceUserMission(double distanceUserMission) {
+		this.distanceUserMission = distanceUserMission;
+	}
+
+	public double getMissionPointArrivee() {
+		return MissionPointArrivee;
+	}
+
+	public void setMissionPointArrivee(double missionPointArrivee) {
+		MissionPointArrivee = missionPointArrivee;
+	}
+	
+	
+	
 }

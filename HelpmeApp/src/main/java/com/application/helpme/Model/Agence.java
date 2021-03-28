@@ -107,13 +107,14 @@ public class Agence {
 	        	m.setPos(posMission);
 	        	
 	            double d1 = distance(depart,m.getPos());
+	            m.setDistanceUserMission(d1);
 	            double d2 = distance(m.getPos(),arrivee);
+	            m.setMissionPointArrivee(d2);
 	            double result=d1+d2;
 	            System.out.println("La mission " + m.getNomMission() + " se trouve a " + d1 + " km de ma position et a " + result + " km de mon point d'arrivee");
 	            
 	            resultat.add(m);
-				
-				
+	        
 				
 			}
 			

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,9 +12,11 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.validation.Valid;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jackson.JsonObjectDeserializer;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -276,20 +279,17 @@ public class Controlleur {
 		return mr.save(x);
 	}
 
-	@GetMapping("/distance/{iduser}/{idmission}")
+	@GetMapping("/distance/{long1}/{lat1}/{long2}/{lat2}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public double calculDistance(@PathVariable int iduser, @PathVariable int idmission, @RequestBody Position posuser,
-			@RequestBody Position posMission) {
-		double x = 0;
-		User user = ur.findById(iduser).get();
-		Mission mission = mr.findById(idmission).get();
+	public double calculDistance(@PathVariable double long1, @PathVariable double lat1, @PathVariable double long2,
+			@PathVariable double lat2) {
 
-		posuser = new Position(2.390055, 48.8077584);
+		Position posuser = new Position(long1, lat1);
 
-		posMission = new Position(2.3500595, 48.862501);
-
-		user.setPos(posuser);
-		mission.setPos(posMission);
+		Position posMission = new Position(long2, lat2);
+//
+//		user.setPos(posuser);
+//		mission.setPos(posMission);
 
 //		 
 //		 user.setPos(posUser);
@@ -297,26 +297,38 @@ public class Controlleur {
 
 		Position p = new Position();
 
-		return p.distance(user.getPos(), mission.getPos());
+		return p.distance(posuser, posMission);
 
 	}
 
-	@GetMapping("/findMission/{iduser}")
+	@GetMapping("/findMission/{iduser}/{long1}/{lat1}/{long2}/{lat2}")
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-	public List<Mission> findMissionCompatible(@PathVariable int iduser, Agence agence) throws Exception {
+	public List<Mission> findMissionCompatible(@PathVariable int iduser, @PathVariable double long1,
+			@PathVariable double lat1, @PathVariable double long2, @PathVariable double lat2) throws Exception {
 
-		List<Mission> missionList = new ArrayList<Mission>();
-
+		Agence agence = new Agence();
 		agence.setListeMission(mr.findAll());
 
 		User user = ur.findById(iduser).get();
 
-		Position posUser = new Position(2.390055, 48.8077584);
+		Position posdepart = new Position(long1, lat1);
 
-		Position posArrivee = new Position(2.200134, 48.92714);
+		Position posArrive = new Position(long2, lat2);
 
-		return agence.estCompatible(user, agence.getListeMission(), posUser, posArrivee);
+		// double dist= this.calculDistance(posUser.getLong(), posUser.getLat(),
+		// posArrivee.getLong(), posArrivee.getLat());
 
+		// System.out.println(dist);
+
+		return agence.estCompatible(user, agence.getListeMission(), posdepart, posArrive);
+
+	}
+	@PostMapping("/MissionPos/{idmission}")
+	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+	public Mission  missionPos(@PathVariable int idmission ,@RequestBody Position positionMission) {
+		Mission x = mr.findById(idmission).get();
+			x.setPos(positionMission);
+		return mr.save(x);
 	}
 
 }
