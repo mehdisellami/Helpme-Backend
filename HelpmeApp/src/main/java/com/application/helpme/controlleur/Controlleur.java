@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.application.helpme.DAO.missionRepository;
+import com.application.helpme.DAO.posRepository;
 import com.application.helpme.DAO.userRepository;
 import com.application.helpme.Model.Agence;
 import com.application.helpme.Model.Email;
@@ -66,6 +67,9 @@ public class Controlleur {
 
 	@Autowired
 	userRepository ur;
+
+	@Autowired
+	posRepository pr;
 
 	String nl = System.getProperty("line.separator");
 
@@ -327,7 +331,8 @@ public class Controlleur {
 	@PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 	public Mission  missionPos(@PathVariable int idmission ,@RequestBody Position positionMission) {
 		Mission x = mr.findById(idmission).get();
-			x.setPos(positionMission);
+		x.setPos(positionMission);
+		pr.save(positionMission);
 		return mr.save(x);
 	}
 

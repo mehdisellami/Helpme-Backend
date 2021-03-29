@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 
 @Table
-public class Mission extends GeoElement implements Serializable {
+public class Mission implements Serializable {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -61,7 +61,7 @@ public class Mission extends GeoElement implements Serializable {
 	
 	private String commentaire;
 
-	@Transient
+	@ManyToOne (fetch = FetchType.LAZY)
 	Position pos;
 	
 	@ManyToOne (fetch = FetchType.LAZY)

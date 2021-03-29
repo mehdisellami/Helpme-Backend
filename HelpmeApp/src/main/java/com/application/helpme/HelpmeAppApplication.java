@@ -19,13 +19,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 
 import com.application.helpme.Model.Agence;
-import com.application.helpme.Model.GeoElement;
 import com.application.helpme.Model.Info;
 import com.application.helpme.Model.Mission;
 import com.application.helpme.Model.Position;
 import com.application.helpme.Model.Pref;
 import com.application.helpme.Model.User;
-import com.application.helpme.Model.UserLocalise;
 
 
 @EntityScan(basePackages = {"com.application.helpme.Model"})
@@ -94,9 +92,9 @@ public class HelpmeAppApplication extends SpringBootServletInitializer {
 		u1.setUserMissionCreateur(m1);
 		
 		
-		UserLocalise u1Localise = new UserLocalise();
-		u1Localise.setUserPos(u1);
-		
+//		UserLocalise u1Localise = new UserLocalise();
+//		u1Localise.setUserPos(u1);
+//		
 		
 		
 		User u2 = new  User();
@@ -119,26 +117,26 @@ public class HelpmeAppApplication extends SpringBootServletInitializer {
 		u4.setPos(positionBaAdja);
 		u4.setPrefUser(prefJeune2);
 		
-		
-		UserLocalise u4Localise = new UserLocalise();
-			u4Localise.setUserPos(u4);
-		
-		List <Mission> listeMission = Arrays.asList(u1.getUserMissionCreateur(),u3.getUserMissionCreateur());
-	
-		
-		Agence agenceChercher = new Agence();
-				
-		agenceChercher.setListeMission(listeMission);
-		
-
-	
-		
-	//	agenceChercher.estCompatible(u1Localise, m3);
-		
-		GeoElement g1 = new GeoElement();
-		g1.setMissionLocalise(m3);
-		g1.setUserLocalise(u1Localise);
-		
+//		
+//		UserLocalise u4Localise = new UserLocalise();
+//			u4Localise.setUserPos(u4);
+//		
+//		List <Mission> listeMission = Arrays.asList(u1.getUserMissionCreateur(),u3.getUserMissionCreateur());
+//	
+//		
+//		Agence agenceChercher = new Agence();
+//				
+//		agenceChercher.setListeMission(listeMission);
+//		
+//
+//	
+//		
+//	//	agenceChercher.estCompatible(u1Localise, m3);
+//		
+//		GeoElement g1 = new GeoElement();
+//		g1.setMissionLocalise(m3);
+//		g1.setUserLocalise(u1Localise);
+//		
 		
 	//	System.out.println(agenceChercher.distance(u1Localise, m3));
 	

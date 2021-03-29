@@ -66,12 +66,12 @@ public class Agence {
 
 	
 	public double distance (Position pos1 , Position pos2 ) {
-		double long1 = pos1.getLong();
+		double long1 = pos1.getLng();
 		
 		
 		double lat1= pos1.getLat();
 		
-		double long2 =pos2.getLong();
+		double long2 =pos2.getLng();
 		double lat2=pos2.getLat();
 	
 		
@@ -86,13 +86,13 @@ public class Agence {
 	}
 	
 	
-	public List<Mission> ListeMission(UserLocalise ul , double b){
-		
-		return null;
-		//return listeMission.stream().filter(m -> distance(ul, m) <= b).collect(Collectors.toList());
-		
-		
-	}
+//	public List<Mission> ListeMission(UserLocalise ul , double b){
+//		
+//		return null;
+//		//return listeMission.stream().filter(m -> distance(ul, m) <= b).collect(Collectors.toList());
+//		
+//		
+//	}
 	
 	public List<Mission> estCompatible( User userpref,  List<Mission>mpref ,Position depart , Position arrivee) {
 		boolean rtr=false;
@@ -103,8 +103,7 @@ public class Agence {
 			 Pref p = new Pref();
 			if (p.accepte(userpref, m) && m.getStatusMission().equals(etatMission.ENATTENTE)) {
 				
-				Position posMission = new Position(2.3500595, 48.862501);
-	        	m.setPos(posMission);
+			
 	        	
 	            double d1 = distance(depart,m.getPos());
 	            m.setDistanceUserMission(d1);
@@ -126,13 +125,13 @@ public class Agence {
 		
 	}
 	
-	public <T> List<Mission> findMission(UserLocalise ul , Contrainte  c , double v){
-		
-		return listeMission.stream()
-				.filter(m -> c.test(ul, m, v))
-				.collect(Collectors.toList());
-		
-	}
-	
+//	public <T> List<Mission> findMission(UserLocalise ul , Contrainte  c , double v){
+//		
+//		return listeMission.stream()
+//				.filter(m -> c.test(ul, m, v))
+//				.collect(Collectors.toList());
+//		
+//	}
+//	
 
 }

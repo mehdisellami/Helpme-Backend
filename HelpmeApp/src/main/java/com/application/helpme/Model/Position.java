@@ -9,13 +9,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-public class Position extends GeoElement {
+@Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class Position  {
 
-
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	
-	private Double Long;
-	private Double Lat;
+	private double lng;
+	private double Lat;
 	
 	
 	
@@ -23,18 +28,46 @@ public class Position extends GeoElement {
 	public Position() {
 		
 	}
-	public Position(Double l, Double lat) {
+	
+	
+	
+	
+	
+	public Position(double lng, double lat) {
 		super();
-		Long = l;
+		this.lng = lng;
 		Lat = lat;
 	}
-	
-	public Double getLong() {
-		return Long;
+
+
+
+
+
+	public double getLng() {
+		return lng;
 	}
-	public void setLong(Double l) {
-		Long = l;
+
+
+
+	public void setLng(double lng) {
+		this.lng = lng;
 	}
+
+
+
+	public void setLat(double lat) {
+		Lat = lat;
+	}
+
+
+
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Double getLat() {
 		return Lat;
 	}
@@ -47,12 +80,12 @@ public class Position extends GeoElement {
 	public double distance(Position pos1 , Position pos2 ) {
 		
 		
-		double long1 = pos1.getLong();
+		double long1 = pos1.getLng();
 		
 		
 		double lat1= pos1.getLat();
 		
-		double long2 =pos2.getLong();
+		double long2 =pos2.getLng();
 		double lat2=pos2.getLat();
 	
 		
@@ -70,12 +103,12 @@ public class Position extends GeoElement {
 	public double distanceMissionPosArrive(Mission missionPos , Position pos ) {
 		
 		
-		double long1 = missionPos.getPos().getLong();
+		double long1 = missionPos.getPos().getLng();
 		
 		
 		double lat1= missionPos.getPos().getLat();
 		
-		double long2 = pos.getLong();
+		double long2 = pos.getLng();
 		double lat2=pos.getLat();
 	
 		
